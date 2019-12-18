@@ -21,13 +21,8 @@ async function connect() {
     database: MYSQL_DATABASE,
     port: MYSQL_PORT,
     timezone: "Z"
-    // debug: true,
-    // multipleStatements: true,
   };
 
-  /**
-   * Create connection pool
-   */
   pool = mysql.createPool(options);
 
   try {
