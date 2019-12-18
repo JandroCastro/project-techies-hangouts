@@ -6,6 +6,7 @@ async function checkAccountSession(req, res, next) {
   const { authorization } = req.headers;
   if (!authorization) {
     return res.status(401).send();
+    ///borrar
   }
 
   const [prefix, token] = authorization.split(" ");
