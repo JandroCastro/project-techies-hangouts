@@ -33,14 +33,53 @@ async function SendWelcomeEmail (email) {
 
 }
 
-async function createAccount(req,res,next){
+async function createUser(req,res,next){
     const accountData = { ...req.body };
 
     try {
-        await validate()
+        await validate(accountData)
         
     } catch (e) {
         console.error(e);
         return res.status(400).send(e)
     }
+
+
+    const now = new Date().toISOString().substring(0,19).replace('T', ' ');
+    const userId = uuidv4();
+    const salt = 10;
+    const bcryptedPassword = await bcrypt.hash(accountData.password, salt);
+
+    let connection;
+    try {
+        connection = await mysqlPool.getConnection();
+        await connection.query(' INSERT INTO Users SET ?' , {
+            id: userId,
+            email: accountData.email,
+            password: bcryptedPassword,
+            created_at: now
+        });
+        connection.release();
+        res.status(201).send()
+
+        try {
+            await SendWelcomeEmail(accountData.email)
+        } catch (e) {
+            console.error(e)
+        }
+
+    } catch (e) {
+        if(connection){
+            connection.release();
+        }
+        console.error(e);
+        if(e.code === 'ER_DUP_ENTRY') {
+            return res.status(409).send();
+        }
+        
+    }
+
 }
+
+
+module.exports = createUser;
