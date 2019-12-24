@@ -2,7 +2,7 @@
 
 const jwt = require("jsonwebtoken");
 
-async function checkAccountSession(req, res, next) {
+async function checkUserSession(req, res, next) {
   const { authorization } = req.headers;
   if (!authorization) {
     return res.status(401).send();
@@ -23,4 +23,4 @@ async function checkAccountSession(req, res, next) {
     return res.status(401).send();
   }
 }
-module.exports = checkAccountSession;
+module.exports = checkUserSession;
