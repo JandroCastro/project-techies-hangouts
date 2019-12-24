@@ -34,10 +34,10 @@ async function SendWelcomeEmail(email) {
 }
 
 async function createUser(req, res, next) {
-  const accountData = { ...req.body };
+  const userData = { ...req.body };
 
   try {
-    await validate(accountData);
+    await validate(userData);
   } catch (e) {
     console.error(e);
     return res.status(400).send(e);
@@ -49,7 +49,7 @@ async function createUser(req, res, next) {
     .replace("T", " ");
   const userId = uuidv4();
   const salt = 10;
-  const bcryptedPassword = await bcrypt.hash(accountData.password, salt);
+  const bcryptedPassword = await bcrypt.hash(userData.password, salt);
 
   let connection;
   try {
