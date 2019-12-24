@@ -2,14 +2,12 @@
 
 const express = require("express");
 
-/*
-aqui tenemos que importar el index de routes
-y debajo del json utilizarlas(app.use...)
-*/
+const { userRouter } = require("./routes");
 
 const app = express();
 
 app.use(express.json());
+app.use("/api", userRouter);
 
 let server = null;
 async function listen(port) {
