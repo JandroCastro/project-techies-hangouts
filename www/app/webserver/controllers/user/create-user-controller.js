@@ -2,11 +2,11 @@
 
 const Joi = require("@hapi/joi");
 const mysqlPool = require("../../../database/mysql-pool");
-const sengridMail = require("@sengrid/mail");
+const sengridMail = require("@sendgrid/mail");
 const uuidv4 = require("uuid/v4");
 const bcrypt = require("bcrypt");
 
-sengridMail.setApiKey(proccess.env.SENGRID_API_KEY);
+sengridMail.setApiKey(process.env.SENGRID_API_KEY);
 
 async function validate(payload) {
   const schema = Joi.object({
