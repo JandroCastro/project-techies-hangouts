@@ -56,7 +56,7 @@ async function createUser(req, res, next) {
     connection = await mysqlPool.getConnection();
     await connection.query(" INSERT INTO Users SET ?", {
       id: userId,
-      email: accountData.email,
+      email: userData.email,
       password: bcryptedPassword,
       created_at: now
     });
@@ -64,7 +64,7 @@ async function createUser(req, res, next) {
     res.status(201).send();
 
     try {
-      await SendWelcomeEmail(accountData.email);
+      await SendWelcomeEmail(userData.email);
     } catch (e) {
       console.error(e);
     }
