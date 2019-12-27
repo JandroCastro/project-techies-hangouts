@@ -62,12 +62,12 @@ async function createUser(req, res, next) {
     });
     connection.release();
     res.status(201).send();
-
+    /*
     try {
       await SendWelcomeEmail(userData.email);
     } catch (e) {
       console.error(e);
-    }
+    }*/
   } catch (e) {
     if (connection) {
       connection.release();

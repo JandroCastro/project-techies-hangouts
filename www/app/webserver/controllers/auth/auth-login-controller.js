@@ -24,7 +24,7 @@ async function login(req, res, next) {
   } catch (e) {
     return res.status(400).send(e);
   }
-  const sqlQuery = `SELECT id, email, password,
+  const sqlQuery = `SELECT id, email, password
     FROM Users
     WHERE email = '${userData.email}'`;
 
@@ -54,7 +54,7 @@ async function login(req, res, next) {
     }
 
     const payloadJwt = {
-      userId: Users.id
+      userId: user.id
     };
 
     const jwtExpiresIn = parseInt(process.env.AUTH_ACCESS_TOKEN_TTL);
@@ -68,7 +68,7 @@ async function login(req, res, next) {
       expiresIn: jwtExpiresIn
     });
   } catch (e) {
-    console.error(e);
+    console.error(e.message);
     return res.status(500).send();
   }
 }
