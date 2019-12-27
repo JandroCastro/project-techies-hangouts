@@ -9,7 +9,7 @@ async function checkUserSession(req, res, next) {
   }
 
   const [prefix, token] = authorization.split(" ");
-  if (prefix !== "bearer" || !token) {
+  if (prefix !== "Bearer" || !token) {
     return res.status(401).send();
   }
   try {
