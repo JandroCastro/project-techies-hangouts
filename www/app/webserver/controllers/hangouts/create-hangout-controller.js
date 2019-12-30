@@ -83,7 +83,7 @@ async function createHangout(req, res, next) {
           attendance: 1
         });
       } catch (e) {
-        console.error(e);
+        throw e;
       }
       connection.release();
       res.header("Location", `${httpServerDomain}/api/hangouts/${hangoutId}`);
