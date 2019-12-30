@@ -6,5 +6,5 @@ const getHangout = require("../controllers/hangouts/get-hangout-controller");
 
 const router = express.Router();
 router.post("/hangouts", checkUserSession, createHangout);
-
+router.get("/hangouts/:hangoutId", checkUserSession, getHangout);
 module.exports = router;
