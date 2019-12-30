@@ -1,6 +1,6 @@
 "use strict";
 const Joi = require("@hapi/joi");
-const mysqlpool = require("../../../database/mysql-pool");
+const mySqlPool = require("../../../database/mysql-pool");
 
 async function validate(payload) {
   const schema = Joi.object({
@@ -28,7 +28,7 @@ async function getHangout(req, res, next) {
 
   let connection;
   try {
-    connection = await mysqlPool.getConnection();
+    connection = await mySqlPool.getConnection();
     const sqlQuery = `SELECT * FROM Events WHERE id = ?`;
 
     const [rows] = await connection.execute(sqlQuery, [hangoutId, userId]);
