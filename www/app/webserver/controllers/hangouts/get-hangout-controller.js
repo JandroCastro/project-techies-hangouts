@@ -25,4 +25,26 @@ async function getHangout(req, res, next) {
   } catch (e) {
     return res.status(400).send(e);
   }
+
+  let connection;
+  try {
+    connection = await mysqlPool.getConnection();
+    const sqlQuery = `SELECT * FROM Events WHERE id = ?`;
+
+    const [rows] = await connection.execute(sqlQuery, [hangoutId, userId]);
+    connection.release();
+    if (rows.length === 0) {
+      return res.status(404).send();
+    }
+    return res.send(rows);
+  } catch (e) {
+    if (connection) {
+      connection.release();
+    }
+
+    console.error(e);
+    return res.status(500).send();
+  }
 }
+
+module.exports = getHangout;
