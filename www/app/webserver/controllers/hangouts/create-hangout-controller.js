@@ -5,6 +5,7 @@ const uuidV4 = require("uuid/v4");
 const mysqlPool = require("../../../database/mysql-pool");
 
 const httpServerDomain = process.env.HTTP_SERVER_DOMAIN;
+<<<<<<< HEAD
 
 // async function validate(payload) {
 //   const schema = joi.object({
@@ -24,16 +25,40 @@ const httpServerDomain = process.env.HTTP_SERVER_DOMAIN;
 
 //   joi.assert(payload, schema);
 // }
+=======
+/*
+async function validate(payload) {
+  const schema = Joi.object({
+    title: Joi.string()
+      .trim()
+      .min(1)
+      .max(256)
+      .required(),
+    content: Joi.string()
+      .trim()
+      .min(10)
+      .max(65536)
+      .required()
+  });
+
+  Joi.assert(payload, schema);
+}*/
+
+/**
+ * MODIFICAR VALIDACIONES SEGUN PAYLOAD REAL
+ *
+ */
+>>>>>>> 2ec71d4000eb6a21b4456fbf47dc2761a965a0e1
 
 async function createHangout(req, res, next) {
   const hangoutData = { ...req.body };
   const { organizatorId } = req.claims;
-
+  /*
   try {
     await validate(hangoutData);
   } catch (e) {
     return res.status(400).send(e);
-  }
+  }*/
   const now = new Date()
     .toISOString()
     .substring(0, 19)
