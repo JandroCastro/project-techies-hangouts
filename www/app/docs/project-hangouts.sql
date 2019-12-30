@@ -70,6 +70,7 @@ CREATE TABLE IF NOT EXISTS `project`.`Events` (
   `place` TEXT CHARACTER SET 'utf8' NOT NULL,
   `event_date` DATETIME NOT NULL,
   `event_hour` DATETIME NOT NULL,
+  `created_at` DATETIME NULL DEFAULT NULL,
   `max_capacity` TINYINT(4) NOT NULL,
   `signed_guests` TINYINT(4) NOT NULL,
   PRIMARY KEY (`id`),
