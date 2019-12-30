@@ -6,24 +6,24 @@ const mysqlPool = require("../../../database/mysql-pool");
 
 const httpServerDomain = process.env.HTTP_SERVER_DOMAIN;
 
-async function validate(payload) {
-  const schema = joi.object({
-    title: joi
-      .string()
-      .trim()
-      .min(1)
-      .max(256)
-      .required(),
-    content: Joi.string()
-      .trim()
-      .min(10)
-      .max(65536)
-      .required(),
-    tags: Joi.array().required()
-  });
+// async function validate(payload) {
+//   const schema = joi.object({
+//     title: joi
+//       .string()
+//       .trim()
+//       .min(1)
+//       .max(256)
+//       .required(),
+//     content: Joi.string()
+//       .trim()
+//       .min(10)
+//       .max(65536)
+//       .required(),
+//     tags: Joi.array().required()
+//   });
 
-  joi.assert(payload, schema);
-}
+//   joi.assert(payload, schema);
+// }
 
 async function createHangout(req, res, next) {
   const hangoutData = { ...req.body };
