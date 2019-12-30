@@ -5,15 +5,15 @@ const uuidV4 = require("uuid/v4");
 const mysqlPool = require("../../../database/mysql-pool");
 
 const httpServerDomain = process.env.HTTP_SERVER_DOMAIN;
-/*
+
 async function validate(payload) {
   const schema = Joi.object({
     title: Joi.string()
       .trim()
       .min(1)
-      .max(256)
+      .max(255)
       .required(),
-    content: Joi.string()
+    description: Joi.string()
       .trim()
       .min(10)
       .max(65536)
@@ -21,7 +21,7 @@ async function validate(payload) {
   });
 
   Joi.assert(payload, schema);
-}*/
+}
 
 /**
  * MODIFICAR VALIDACIONES SEGUN PAYLOAD REAL
@@ -31,26 +31,37 @@ async function validate(payload) {
 async function createHangout(req, res, next) {
   const hangoutData = { ...req.body };
   const { organizatorId } = req.claims;
-  /*
+
   try {
     await validate(hangoutData);
   } catch (e) {
     return res.status(400).send(e);
-  }*/
+  }
   const now = new Date()
     .toISOString()
     .substring(0, 19)
     .replace("T", " ");
-  const { title, content } = hangoutData;
+  const {
+    title,
+    description,
+    city,
+    photo_url,
+    address,
+    place,
+    date,
+    hour,
+    capacity
+  } = hangoutData;
 
   const hangoutId = uuidV4();
+
   const hangout = {
     id: hangoutId,
     address,
-    city,
-    date,
+    event_date: date,
+    event_hour: hour,
+    max_capacity: capacity,
     description,
-    hour,
     photo_url,
     place,
     title,
@@ -64,8 +75,8 @@ async function createHangout(req, res, next) {
       const sqlCreateHangout = "INSERT INTO Events SET ?";
       await connection.query(sqlCreateHangout, hangout);
 
-      const sqlUsers_Events = "INSERT INTO Users_Events SET ?";
       try {
+        const sqlUsers_Events = "INSERT INTO Users_Events SET ?";
         await connection.query(sqlUsers_Events, {
           id_users: organizatorId,
           event_id: hangoutId,
