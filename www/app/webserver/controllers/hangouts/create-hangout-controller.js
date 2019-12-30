@@ -72,11 +72,11 @@ async function createHangout(req, res, next) {
   try {
     const connection = await mysqlPool.getConnection();
     try {
-      const sqlCreateHangout = "INSERT INTO Events SET ?";
+      const sqlCreateHangout = `INSERT INTO Events SET ?`;
       await connection.query(sqlCreateHangout, hangout);
 
       try {
-        const sqlUsers_Events = "INSERT INTO Users_Events SET ?";
+        const sqlUsers_Events = `INSERT INTO Users_Events SET ?`;
         await connection.query(sqlUsers_Events, {
           id_users: organizatorId,
           event_id: hangoutId,
