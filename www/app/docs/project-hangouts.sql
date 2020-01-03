@@ -27,7 +27,7 @@ USE `project` ;
 DROP TABLE IF EXISTS `project`.`Cities` ;
 
 CREATE TABLE IF NOT EXISTS `project`.`Cities` (
-  `id` CHAR(36) CHARACTER SET 'utf8' NOT NULL,
+  `id` CHAR(36) CHARACTER SET 'utf8'  NOT NULL,
   `name` VARCHAR(100) CHARACTER SET 'utf8' NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
@@ -69,10 +69,10 @@ CREATE TABLE IF NOT EXISTS `project`.`Events` (
   `address` VARCHAR(255) CHARACTER SET 'utf8' NOT NULL,
   `place` TEXT CHARACTER SET 'utf8' NOT NULL,
   `event_date` DATETIME NOT NULL,
-  `event_hour` DATETIME NOT NULL,
-  `created_at` DATETIME NULL DEFAULT NULL,
+ /* `event_hour` TIME NOT NULL,*/
+  `created_at` DATETIME  DEFAULT NULL,
   `max_capacity` TINYINT(4) NOT NULL,
-  `signed_guests` TINYINT(4) NOT NULL,
+  /*`signed_guests` TINYINT(4) NOT NULL,*/
   PRIMARY KEY (`id`),
   INDEX `user_id` (`user_id` ASC),
   INDEX `city_id` (`city_id` ASC),
@@ -122,7 +122,7 @@ DROP TABLE IF EXISTS `project`.`Users_Events` ;
 CREATE TABLE IF NOT EXISTS `project`.`Users_Events` (
   `id_users` CHAR(36) CHARACTER SET 'utf8' NOT NULL,
   `event_id` CHAR(36) CHARACTER SET 'utf8' NOT NULL,
-  `attendance` TINYINT(1) NOT NULL DEFAULT 0,
+  `attendance` TINYINT(100) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id_users`, `event_id`),
   INDEX `event_id` (`event_id` ASC),
   CONSTRAINT `Users_Events_ibfk_1`

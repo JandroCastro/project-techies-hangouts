@@ -17,7 +17,15 @@ async function validate(payload) {
       .trim()
       .min(10)
       .max(65536)
+      .required(),
+    /*city: Joi.string().required(),*/
+    address: Joi.string().required(),
+    place: Joi.string().required(),
+    date: Joi.date().required(),
+    /*hour: Joi.string().required(),*/
+    capacity: Joi.number()
       .required()
+      .min(3)
   });
 
   Joi.assert(payload, schema);
@@ -30,7 +38,7 @@ async function validate(payload) {
 
 async function createHangout(req, res, next) {
   const hangoutData = { ...req.body };
-  const { organizatorId } = req.claims;
+  const { userId } = req.claims;
 
   try {
     await validate(hangoutData);
@@ -44,12 +52,11 @@ async function createHangout(req, res, next) {
   const {
     title,
     description,
-    city,
-    photo_url,
+    /* city,*/
     address,
     place,
     date,
-    hour,
+    /*hour,*/
     capacity
   } = hangoutData;
 
@@ -59,14 +66,13 @@ async function createHangout(req, res, next) {
     id: hangoutId,
     address,
     event_date: date,
-    event_hour: hour,
+    /*event_hour: hour,*/
     max_capacity: capacity,
     description,
-    photo_url,
     place,
     title,
-    user_id: organizatorId,
-    created_at: now
+    user_id: userId
+    /*created_at: now*/
   };
 
   try {
@@ -78,7 +84,7 @@ async function createHangout(req, res, next) {
       try {
         const sqlUsers_Events = `INSERT INTO Users_Events SET ?`;
         await connection.query(sqlUsers_Events, {
-          id_users: organizatorId,
+          id_users: userId,
           event_id: hangoutId,
           attendance: 1
         });
