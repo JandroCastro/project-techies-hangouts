@@ -18,11 +18,12 @@ async function validate(payload) {
       .min(10)
       .max(65536)
       .required(),
-    /*city: Joi.string().required(),*/
     address: Joi.string().required(),
     place: Joi.string().required(),
+    city: Joi.string(),
     date: Joi.date().required(),
-    /*hour: Joi.string().required(),*/
+    hour: Joi.string(),
+    photo_url: Joi.string(),
     capacity: Joi.number()
       .required()
       .min(3)
@@ -31,11 +32,6 @@ async function validate(payload) {
   Joi.assert(payload, schema);
 }
 
-/**
- * MODIFICAR VALIDACIONES SEGUN PAYLOAD REAL
- *
- */
-
 async function createHangout(req, res, next) {
   const hangoutData = { ...req.body };
   const { userId } = req.claims;
@@ -43,40 +39,57 @@ async function createHangout(req, res, next) {
   try {
     await validate(hangoutData);
   } catch (e) {
+    console.error(e);
     return res.status(400).send(e);
   }
   const now = new Date()
     .toISOString()
     .substring(0, 19)
     .replace("T", " ");
+
   const {
     title,
     description,
-    /* city,*/
     address,
     place,
+    city,
     date,
-    /*hour,*/
+    hour,
+    photo_url,
     capacity
   } = hangoutData;
 
   const hangoutId = uuidV4();
-
-  const hangout = {
-    id: hangoutId,
-    address,
-    event_date: date,
-    /*event_hour: hour,*/
-    max_capacity: capacity,
-    description,
-    place,
-    title,
-    user_id: userId
-    /*created_at: now*/
-  };
-
+  let connection;
   try {
-    const connection = await mysqlPool.getConnection();
+    connection = await mysqlPool.getConnection();
+    const consultCityIdQuery = `SELECT *
+      FROM Cities
+      WHERE
+        name = ?`;
+    const [row] = await connection.query(consultCityIdQuery, city);
+    connection.release();
+
+    if (row.length === 0) {
+      return res.status(400).send();
+    }
+
+    const hangout = {
+      id: hangoutId,
+      address,
+      event_date: date,
+      max_capacity: capacity,
+      description,
+      place,
+      title,
+      photo_url,
+      city_id: row[0].id,
+      event_hour: hour,
+      created_at: now,
+      user_id: userId
+    };
+
+    connection = await mysqlPool.getConnection();
     try {
       const sqlCreateHangout = `INSERT INTO Events SET ?`;
       await connection.query(sqlCreateHangout, hangout);

@@ -64,22 +64,22 @@ CREATE TABLE IF NOT EXISTS `project`.`Events` (
   `title` VARCHAR(255) CHARACTER SET 'utf8' NOT NULL,
   `description` TEXT CHARACTER SET 'utf8' NOT NULL,
   `user_id` CHAR(36) CHARACTER SET 'utf8' NOT NULL,
-  `city_id` CHAR(36) CHARACTER SET 'utf8' NOT NULL,
-  `photo_url` VARCHAR(255) CHARACTER SET 'utf8' NOT NULL,
-  `address` VARCHAR(255) CHARACTER SET 'utf8' NOT NULL,
-  `place` TEXT CHARACTER SET 'utf8' NOT NULL,
-  `event_date` DATETIME NOT NULL,
- /* `event_hour` TIME NOT NULL,*/
-  `created_at` DATETIME  DEFAULT NULL,
+  `city_id` CHAR(36) CHARACTER SET 'utf8',
+  `photo_url` VARCHAR(255) CHARACTER SET 'utf8',
+  `address` VARCHAR(255) CHARACTER SET 'utf8',
+  `place` TINYTEXT CHARACTER SET 'utf8',
+  `event_date` DATE NOT NULL,
+  `event_hour` TIME NOT NULL,
+  `created_at` DATETIME,
   `max_capacity` TINYINT(4) NOT NULL,
-  /*`signed_guests` TINYINT(4) NOT NULL,*/
+  `signed_guests` TINYINT(4),
   PRIMARY KEY (`id`),
   INDEX `user_id` (`user_id` ASC),
   INDEX `city_id` (`city_id` ASC),
   CONSTRAINT `Events_ibfk_1`
     FOREIGN KEY (`user_id`)
     REFERENCES `project`.`Users` (`id`),
-  CONSTRAINT `Events_ibfk_2`
+ CONSTRAINT `Events_ibfk_2`
     FOREIGN KEY (`city_id`)
     REFERENCES `project`.`Cities` (`id`))
 ENGINE = InnoDB
@@ -95,15 +95,15 @@ DROP TABLE IF EXISTS `project`.`Profiles` ;
 CREATE TABLE IF NOT EXISTS `project`.`Profiles` (
  
   `user_id` CHAR(36) CHARACTER SET 'utf8' NOT NULL,
-  `age` TINYINT(4) NOT NULL,
-  `name` VARCHAR(100) CHARACTER SET 'utf8' NOT NULL,
-  `category` VARCHAR(100) CHARACTER SET 'utf8' NOT NULL,
-  `position` VARCHAR(100) CHARACTER SET 'utf8' NOT NULL,
-  `aboutMe` VARCHAR(500) CHARACTER SET 'utf8' NOT NULL,
-  `avatar_url` VARCHAR(255) CHARACTER SET 'utf8' NOT NULL,
-  `link_url` VARCHAR(255) CHARACTER SET 'utf8' NOT NULL,
-  `created_at` DATETIME NULL DEFAULT NULL,
-  `update_at` DATETIME NULL DEFAULT NULL,
+  `age` TINYINT(100) NOT NULL,
+  `name` VARCHAR(100) CHARACTER SET 'utf8',
+  `category` VARCHAR(100) CHARACTER SET 'utf8',
+  `position` VARCHAR(100) CHARACTER SET 'utf8',
+  `aboutMe` VARCHAR(500) CHARACTER SET 'utf8',
+  `avatar_url` VARCHAR(255) CHARACTER SET 'utf8',
+  `link_url` VARCHAR(255) CHARACTER SET 'utf8',
+  `created_at` DATETIME,
+  `update_at` DATETIME DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   INDEX `user_id` (`user_id` ASC),
   CONSTRAINT `Profiles_ibfk_1`
@@ -122,7 +122,7 @@ DROP TABLE IF EXISTS `project`.`Users_Events` ;
 CREATE TABLE IF NOT EXISTS `project`.`Users_Events` (
   `id_users` CHAR(36) CHARACTER SET 'utf8' NOT NULL,
   `event_id` CHAR(36) CHARACTER SET 'utf8' NOT NULL,
-  `attendance` TINYINT(100) NOT NULL DEFAULT 0,
+  `attendance` TINYINT(100)  DEFAULT 1,
   PRIMARY KEY (`id_users`, `event_id`),
   INDEX `event_id` (`event_id` ASC),
   CONSTRAINT `Users_Events_ibfk_1`
@@ -134,6 +134,12 @@ CREATE TABLE IF NOT EXISTS `project`.`Users_Events` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;
+
+INSERT INTO Cities (id,name)  VALUES
+("5a3837fa-b4da-4550-b177-9c30c505cd52", "A Coruna"),
+("5c66391f-3ae0-4bc9-8309-b275f0687ca7" , "Madrid"),
+("31cd9f5f-a7f2-42b9-8c6b-13a39ae7ccdf" , "Barcelona"),
+("e5cdce3e-8ff2-442c-8e3e-dba89a476131" , "Sevilla");
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
