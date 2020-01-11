@@ -23,7 +23,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jandroportonovo5@yopmail.com\",\n\t\"password\": \"Portonovo1993\"\n}",
+							"raw": "{\n\t\"email\": \"jandroportonovo36@yopmail.com\",\n\t\"password\": \"Portonovo1993\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -104,7 +104,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jandroportonovo@yopmail.com\",\n\t\"password\": \"Portonovo1993\"\n}",
+							"raw": "{\n\t\"email\": \"jandroportonovo36@yopmail.com\",\n\t\"password\": \"Portonovo1993\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -143,13 +143,13 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{accesToken}}",
+								"value": "Bearer {{Token}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Cañas Javascript\",\n\t\"description\": \"Venga chavales, vamos a quedar a tomar unas cañas y ver la mierda de JS\",\n\t\"city\": \"A Coruña\",\n\t\"photo_url\":\"https://www.google.com/imgres?imgurl=https%3A%2F%2Fpm1.narvii.com%2F6190%2F46713426cda73c84ed0cdf06071c0218a04f6a57_hq.jpg&imgrefurl=https%3A%2F%2Faminoapps.com%2Fc%2Fanime-es%2Fpage%2Fblog%2F25-imagenes-random-y-plantillas%2F7eNc_Pu8WpvGx8GxqnGdnrNPzm4q4xr&tbnid=DTa_3wgd-vNBBM&vet=12ahUKEwip1db5y8TmAhWDwYUKHYDcDZcQMygHegUIARD1AQ..i&docid=y0pk-z5Rl-cHBM&w=417&h=246&q=foto%20random&ved=2ahUKEwip1db5y8TmAhWDwYUKHYDcDZcQMygHegUIARD1AQ\",\n\t\"address\" : \"Manuel Murguía, 7\",\n\t\"place\": \"La Consentida\",\n\t\"date\" : \"27/03/2020\",\n\t\"hour\": \"22:00\",\n\t\"capacity\": \"8\"\n}",
+							"raw": "{\n\t\"title\": \"Cañas Javascript\",\n\t\"description\": \"Venga chavales, vamos a quedar a tomar unas cañas y ver la mierda de JS\",\n\t\"address\" : \"Manuel Murguía, 7\",\n\t\"city\": \"A Coruna\",\n\t\"place\": \"La Consentida\",\n\t\"photo_url\": \"https://unsplash.com/photos/ZHvM3XIOHoE\",\n\t\"date\" : \"2023-10-25\",\n\t\"hour\": \"20:00:00\",\n\t\"capacity\": \"8\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -176,7 +176,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{accesToken}}",
+								"value": "Bearer {{Token}}",
 								"type": "text"
 							},
 							{
@@ -205,7 +205,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{accesToken}}",
+								"value": "Bearer {{Token}}",
 								"type": "text"
 							},
 							{
@@ -215,19 +215,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}api/hangouts/(id de quedada)",
+							"raw": "{{url}}api/hangouts/0377a89b-4ba5-47c0-8603-ade1c03f2a2f",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
 								"hangouts",
-								"(id de quedada)"
-							],
-							"query": [
-								{
-									"key": "",
-									"value": ""
-								}
+								"0377a89b-4ba5-47c0-8603-ade1c03f2a2f"
 							]
 						},
 						"description": "Get one hangout by id"
@@ -241,7 +235,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{accesToken}}",
+								"value": "Bearer {{Token}}",
 								"type": "text"
 							},
 							{
@@ -273,7 +267,7 @@
 				{
 					"name": "profiles",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -283,13 +277,13 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{accesToken}}",
+								"value": "Bearer {{Token}}",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "  {\n  \t\"age\":\"28\",\n  \t\"name\": \"Alejandro Jose Sergio\",\n  \t\"category\": \"Senior Tech Leader de la ostia\",\n  \t\"position\": \"Jefazo máximo del lugar y la galaxia\",\n  \t\"about\": \"Somos tres chavales que queremos derrocar la  República, los putos jefes del Imperio y los Jedi son unos lilas\",\n  \t\"link\": \"https://github.com/JandroCastro/project-techies-hangouts\"\n  \t\n  }\n ",
+							"raw": "  {\n  \t\"age\":\"3\",\n  \t\"name\": \"Alejandro Jose Sergio\",\n  \t\"category\": \"Senior Tech Leader de la ostia\",\n  \t\"position\": \"Jefazo máximo del lugar y la galaxia\",\n  \t\"about\": \"Somos tres chavales que queremos derrocar la  República\",\n  \t\"link\": \"https://github.com/JandroCastro/project-techies-hangouts\"\n  \t\n  }\n ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -322,7 +316,7 @@
 						"header": [
 							{
 								"key": "Authorization",
-								"value": "Bearer {{accesToken}}",
+								"value": "Bearer {{Token}}",
 								"type": "text"
 							},
 							{
