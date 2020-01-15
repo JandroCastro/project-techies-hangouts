@@ -1,8 +1,15 @@
 "use strict";
 
+/**
+ * ERROR EN LA SINTAXIS DE LA QUERY:
+ * 'You have an error in your SQL syntax;
+ * check the manual that corresponds to your MySQL server
+ * version for the right syntax to use near \'?\n
+ *  WHERE user_id = ?\' at line 1'
+ */
+
 const Joi = require("@hapi/joi");
-const mySqlPool = require("mysql2");
-const httpServerDomain = process.env.HTTP_SERVER_DOMAIN;
+const mySqlPool = require("../../../database/mysql-pool");
 
 async function validate(payload) {
   const schema = Joi.object({
@@ -30,15 +37,17 @@ async function validate(payload) {
       .min(1)
       .max(150)
       .required(),
-    link: Joi.link()
+    link: Joi.string(),
+    avatar: Joi.string()
   });
 
   Joi.assert(payload, schema);
 }
 
-async function createProfile(req, res, next) {
+async function updateProfile(req, res, next) {
   const profileData = { ...req.body };
-  const { userId } = req.claims;
+  const { profileId } = req.params;
+  console.log(req.params);
 
   try {
     await validate(profileData);
@@ -51,33 +60,42 @@ async function createProfile(req, res, next) {
     .substring(0, 19)
     .replace("T", " ");
 
-  const { age, name, category, position, about, link } = profileData;
+  const { age, name, category, position, about, link, avatar } = profileData;
 
   const profile = {
-    user_id: userId,
     age,
     name,
     category,
     position,
     aboutMe: about,
     link_url: link,
-    created_at: now
+    updated_at: now,
+    avatar_url: avatar
   };
 
+  let connection;
   try {
     const connection = await mySqlPool.getConnection();
+    const sqlQuery = `UPDATE Profiles
+    SET ?
+    WHERE user_id = ?`;
+    try {
+      await connection.execute(sqlQuery, [profile, profileId]);
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
 
-    const sqlQuery = `INSERT INTO Profiles SET ?`;
-    await connection.query(sqlQuery, profile);
     connection.release();
-    res.header("Location", `${httpServerDomain}/api/profiles/${userId}`);
-    return res.status(201).send();
+
+    return res.status(200).send();
   } catch (e) {
     if (connection) {
       connection.release();
     }
+    console.error(e);
     return res.status(500).send();
   }
 }
 
-module.exports = createProfile;
+module.exports = updateProfile;
