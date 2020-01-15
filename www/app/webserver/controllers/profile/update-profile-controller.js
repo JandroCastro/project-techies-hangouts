@@ -37,8 +37,7 @@ async function validate(payload) {
       .min(1)
       .max(150)
       .required(),
-    link: Joi.string(),
-    avatar: Joi.string()
+    link: Joi.string()
   });
 
   Joi.assert(payload, schema);
@@ -60,7 +59,7 @@ async function updateProfile(req, res, next) {
     .substring(0, 19)
     .replace("T", " ");
 
-  const { age, name, category, position, about, link, avatar } = profileData;
+  const { age, name, category, position, about, link } = profileData;
 
   const profile = {
     age,
@@ -69,8 +68,7 @@ async function updateProfile(req, res, next) {
     position,
     aboutMe: about,
     link_url: link,
-    updated_at: now,
-    avatar_url: avatar
+    updated_at: now
   };
 
   let connection;
@@ -80,7 +78,7 @@ async function updateProfile(req, res, next) {
     SET ?
     WHERE user_id = ?`;
     try {
-      await connection.execute(sqlQuery, [profile, profileId]);
+      await connection.query(sqlQuery, [profile, profileId]);
     } catch (e) {
       console.error(e);
       throw e;
