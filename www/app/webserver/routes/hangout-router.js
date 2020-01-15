@@ -4,7 +4,7 @@ const checkUserSession = require("../controllers/user/check-user-session");
 const createHangout = require("../controllers/hangouts/create-hangout-controller");
 const getHangout = require("../controllers/hangouts/get-hangout-controller");
 const getAllHangouts = require("../controllers/hangouts/get-all-hangouts-controller");
-const getHangoutByCity = require("../controllers/hangouts/get-hangout-by-city");
+const getHangoutByCity = require("../controllers/hangouts/get-hangout-by-city-controller");
 
 const router = express.Router();
 router.post("/hangouts", checkUserSession, createHangout);
