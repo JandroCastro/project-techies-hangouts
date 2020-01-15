@@ -3,7 +3,7 @@
 const mySqlPool = require("../../../database/mysql-pool");
 
 async function getHangoutByThematic(req, res, next) {
-  const { thematicId } = req.params;
+  const { nameThematic } = req.params;
 
   const now = new Date()
     .toISOString()
@@ -15,9 +15,22 @@ async function getHangoutByThematic(req, res, next) {
   const currentHour = now[1];
 
   let connection;
+
   try {
     connection = await mySqlPool.getConnection();
-    const sqlQuery = `SELECT * FROM Thematics
+
+    const consultThematicIdQuery = `SELECT *
+      FROM Thematics
+      WHERE
+        name = ?`;
+    const [row] = await connection.query(consultThematicIdQuery, nameThematic);
+    connection.release();
+
+    if (row.length === 0) {
+      return res.status(400).send();
+    }
+    const thematicId = row[0].id;
+    const sqlQuery = `SELECT * FROM Events
     WHERE thematic_id = ? 
     AND event_date >= ? 
     AND event_hour > ? 
