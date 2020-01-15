@@ -95,18 +95,22 @@ async function createHangout(req, res, next) {
       await connection.query(sqlCreateHangout, hangout);
 
       try {
-        const sqlUsers_Events = `INSERT INTO Users_Events SET ?`;
-        await connection.query(sqlUsers_Events, {
+        const sqlUpdateAttendance = `INSERT INTO Attendance SET ?`;
+        await connection.query(sqlUpdateAttendance, {
           id_users: userId,
           event_id: hangoutId,
-          attendance: 1
+          request_status: 2
         });
       } catch (e) {
         throw e;
       }
       connection.release();
       res.header("Location", `${httpServerDomain}/api/hangouts/${hangoutId}`);
-      return res.status(201).send();
+      return res.status(201).send(hangoutId);
+      /**
+       * Devuelve hangoutId para meter en variable de entorno
+       * de Postman
+       */
     } catch (e) {
       connection.release();
       throw e;
