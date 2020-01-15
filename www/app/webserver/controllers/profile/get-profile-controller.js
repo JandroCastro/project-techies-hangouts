@@ -8,7 +8,7 @@ async function getProfile(req, res, next) {
   let connection;
   try {
     connection = await mySqlPool.getConnection();
-    const sqlQuery = `SELECT * FROM Profiles WHERE id = ?`;
+    const sqlQuery = `SELECT * FROM Profiles WHERE user_id = ?`;
     const [rows] = await connection.query(sqlQuery, profileId);
     connection.release();
     if (rows.length === 0) {
