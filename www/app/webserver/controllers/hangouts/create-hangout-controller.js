@@ -66,7 +66,7 @@ async function createHangout(req, res, next) {
     const consultCityIdQuery = `SELECT *
       FROM Cities
       WHERE
-        name = ?`;
+      name = ?`;
     const [row] = await connection.query(consultCityIdQuery, city);
     connection.release();
 
@@ -99,7 +99,7 @@ async function createHangout(req, res, next) {
         await connection.query(sqlUpdateAttendance, {
           id_users: userId,
           event_id: hangoutId,
-          request_status: 2
+          request_status: "accepted"
         });
       } catch (e) {
         throw e;

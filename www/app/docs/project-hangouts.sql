@@ -162,17 +162,17 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 INSERT INTO Thematics (id,name)  VALUES
-("1a9a2bdc-3a1b-445c-9d5a-e9a643f3baf1", "Javascript"),
-("435365a1-c680-4165-908c-862c05e3ac4a", "HTML"),
-("78ab6eb2-9f16-470d-bb9c-90d37ed2979d", "CSS"),
-("bc3e7051-149e-475f-ac33-2394565be645", "Node"),
-("1680c313-c7af-497a-b05f-b376c773b038", "React");
+("1a9a2bdc-3a1b-445c-9d5a-e9a643f3baf1", "javascript"),
+("435365a1-c680-4165-908c-862c05e3ac4a", "html"),
+("78ab6eb2-9f16-470d-bb9c-90d37ed2979d", "css"),
+("bc3e7051-149e-475f-ac33-2394565be645", "node"),
+("1680c313-c7af-497a-b05f-b376c773b038", "react");
 
 INSERT INTO Cities (id,name)  VALUES
-("5a3837fa-b4da-4550-b177-9c30c505cd52", "A Coruna"),
-("5c66391f-3ae0-4bc9-8309-b275f0687ca7" , "Madrid"),
-("31cd9f5f-a7f2-42b9-8c6b-13a39ae7ccdf" , "Barcelona"),
-("e5cdce3e-8ff2-442c-8e3e-dba89a476131" , "Sevilla");
+("5a3837fa-b4da-4550-b177-9c30c505cd52", "coruna"),
+("5c66391f-3ae0-4bc9-8309-b275f0687ca7" , "madrid"),
+("31cd9f5f-a7f2-42b9-8c6b-13a39ae7ccdf" , "barcelona"),
+("e5cdce3e-8ff2-442c-8e3e-dba89a476131" , "sevilla");
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
