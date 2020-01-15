@@ -6,6 +6,10 @@ const sengridMail = require("@sendgrid/mail");
 const uuidv4 = require("uuid/v4");
 const bcrypt = require("bcrypt");
 
+const httpServerDomain = process.env.HTTP_SERVER_DOMAIN;
+const defaultImageUrl =
+  "https://www.freepik.es/vector-premium/avatar-hombre-negocios_2781932.htm";
+
 sengridMail.setApiKey(process.env.SENGRID_API_KEY);
 
 async function validate(payload) {
@@ -38,6 +42,12 @@ async function createUser(req, res, next) {
 
   try {
     await validate(userData);
+    /**
+     * At this point, note was created, so,
+     * we can associate the tags
+     *  - insertar relacíon entre tag y note en la tabla notes_tags
+     *  - note_id, tag_id, created_at
+     */
   } catch (e) {
     console.error(e);
     return res.status(400).send(e);
@@ -53,21 +63,53 @@ async function createUser(req, res, next) {
 
   let connection;
   try {
-    connection = await mysqlPool.getConnection();
-    await connection.query(" INSERT INTO Users SET ?", {
-      id: userId,
-      email: userData.email,
-      password: bcryptedPassword,
-      created_at: now
-    });
+    const connection = await mysqlPool.getConnection();
+
+    try {
+      const sqlCreateUser = `INSERT INTO Users SET ?`;
+      await connection.query(sqlCreateUser, {
+        id: userId,
+        email: userData.email,
+        password: bcryptedPassword,
+        created_at: now
+      });
+
+      try {
+        const sqlCreateProfile = `INSERT INTO Profiles SET ?`;
+        await connection.query(sqlCreateProfile, {
+          user_id: userId,
+          avatar_url: defaultImageUrl,
+          created_at: now
+        });
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+
     connection.release();
-    res.status(201).send();
+
+    res.header("Location", `${httpServerDomain}/api/users/${userId}`);
+    res.status(201).send(userId);
+    /**
+     * Pongo que me devuelva userId para poder guardar en la
+     * variable de entorno de Postman y poder seguir probando
+     */
+
     /*
     try {
       await SendWelcomeEmail(userData.email);
     } catch (e) {
       console.error(e);
     }*/
+
+    /**
+     * Silencio SendGrid porque no me va la API, por tema de
+     * API KEYS
+     */
   } catch (e) {
     if (connection) {
       connection.release();
@@ -76,6 +118,7 @@ async function createUser(req, res, next) {
     if (e.code === "ER_DUP_ENTRY") {
       return res.status(409).send();
     }
+    return res.status(500).send();
   }
 }
 
