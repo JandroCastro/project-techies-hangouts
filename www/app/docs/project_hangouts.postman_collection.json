@@ -215,13 +215,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}api/hangouts/0377a89b-4ba5-47c0-8603-ade1c03f2a2f",
+							"raw": "{{url}}api/hangouts/{{hangoutId}}",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
 								"hangouts",
-								"0377a89b-4ba5-47c0-8603-ade1c03f2a2f"
+								"{{hangoutId}}"
 							]
 						},
 						"description": "Get one hangout by id"
@@ -245,13 +245,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}api/hangouts/(idquedada)",
+							"raw": "{{url}}api/hangouts/{{hangoutId}}",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
 								"hangouts",
-								"(idquedada)"
+								"{{hangoutId}}"
 							]
 						},
 						"description": "Delete one hangout. Only organizators can do this"
@@ -267,7 +267,7 @@
 				{
 					"name": "profiles",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -283,7 +283,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "  {\n  \t\"age\":\"3\",\n  \t\"name\": \"Alejandro Jose Sergio\",\n  \t\"category\": \"Senior Tech Leader de la ostia\",\n  \t\"position\": \"Jefazo máximo del lugar y la galaxia\",\n  \t\"about\": \"Somos tres chavales que queremos derrocar la  República\",\n  \t\"link\": \"https://github.com/JandroCastro/project-techies-hangouts\"\n  \t\n  }\n ",
+							"raw": "  {\n  \t\"age\":\"3\",\n  \t\"name\": \"Alejandro Jose Sergio\",\n  \t\"category\": \"Senior Tech Leader de la ostia\",\n  \t\"position\": \"Jefazo máximo del lugar y la galaxia\",\n  \t\"about\": \"Somos tres chavales que queremos derrocar la  República\",\n  \t\"link\": \"https://github.com/JandroCastro/project-techies-hangouts\",\n  \t\"avatar\": \"https://images-na.ssl-images-amazon.com/images/I/41I7stkObXL.jpg\"\n  \t\n  }\n ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -291,12 +291,56 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}api/profiles",
+							"raw": "{{url}}api/profiles/{{userId}}",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
-								"profiles"
+								"profiles",
+								"{{userId}}"
+							]
+						},
+						"description": "modificate profile data"
+					},
+					"response": []
+				},
+				{
+					"name": "profiles",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/profiles/{{userId}}",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"profiles",
+								"{{userId}}"
 							]
 						},
 						"description": "modificate profile data"
