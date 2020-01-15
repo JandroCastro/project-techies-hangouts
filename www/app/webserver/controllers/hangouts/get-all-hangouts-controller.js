@@ -17,7 +17,7 @@ async function getAllHangouts(req, res, next) {
     connection = await mySqlPool.getConnection();
     const sqlQuery = `SELECT * FROM Events WHERE
     event_date  >= ?
-    AND event_date < '2150-01-01'
+    AND deleted_at IS NULL
     ORDER BY event_date ASC`;
 
     const today = new Date().toISOString().substring(0, 10);
