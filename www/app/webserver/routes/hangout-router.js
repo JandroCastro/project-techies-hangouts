@@ -12,7 +12,11 @@ const router = express.Router();
 router.post("/hangouts", checkUserSession, createHangout);
 router.get("/hangouts/:hangoutId", checkUserSession, getHangout);
 router.get("/hangouts", checkUserSession, getAllHangouts);
-router.get("/hangouts/:cityId", checkUserSession, getHangoutByCity);
-router.get("/hangouts/:thematicId", checkUserSession, getHangoutByThematic);
+router.get("/hangouts/:cityName", checkUserSession, getHangoutByCity);
+router.get(
+  "/hangouts/thematic/:thematicName",
+  checkUserSession,
+  getHangoutByThematic
+);
 router.delete("/hangouts/:hangoutId", checkUserSession, deleteHangout);
 module.exports = router;
