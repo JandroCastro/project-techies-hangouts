@@ -66,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `project`.`Events` (
   `event_hour` TIME NOT NULL,
   `created_at` DATETIME NULL DEFAULT NULL,
   `max_capacity` TINYINT(4) NOT NULL,
+  `deleted_at` DATETIME NULL DEFAULT NULL,
   `signed_guests` TINYINT(4) NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `user_id` (`user_id` ASC),
