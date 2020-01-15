@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `project`.`Events` (
   `created_at` DATETIME NULL DEFAULT NULL,
   `max_capacity` TINYINT(4) NOT NULL,
   `deleted_at` DATETIME NULL DEFAULT NULL,
-  `thematic_id` INT NOT NULL,
+  `thematic_id` CHAR(36) CHARACTER SET 'utf8' NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `user_id` (`user_id` ASC),
   INDEX `city_id` (`city_id` ASC),
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `project`.`Events` (
     REFERENCES `project`.`Cities` (`id`),
   CONSTRAINT `fk_Events_Thematics1`
     FOREIGN KEY (`thematic_id`)
-    REFERENCES `mydb`.`Thematics` (`id`)
+    REFERENCES `project`.`Thematics` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
