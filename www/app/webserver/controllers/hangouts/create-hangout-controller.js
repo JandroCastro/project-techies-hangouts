@@ -26,7 +26,8 @@ async function validate(payload) {
     photo_url: Joi.string(),
     capacity: Joi.number()
       .required()
-      .min(3)
+      .min(3),
+    thematic: Joi.string().required()
   });
 
   Joi.assert(payload, schema);
@@ -53,6 +54,7 @@ async function createHangout(req, res, next) {
     address,
     place,
     city,
+    thematic,
     date,
     hour,
     photo_url,
@@ -74,6 +76,23 @@ async function createHangout(req, res, next) {
       return res.status(400).send();
     }
 
+    connection = await mysqlPool.getConnection();
+    const consultThematicIdQuery = `SELECT *
+      FROM Thematics
+      WHERE
+      name = ?`;
+    const [anotherRow] = await connection.query(
+      consultThematicIdQuery,
+      thematic
+    );
+    connection.release();
+
+    if (anotherRow.length === 0) {
+      return res.status(400).send();
+    }
+    console.log(anotherRow[0].id);
+    console.log(req.claims);
+
     const hangout = {
       id: hangoutId,
       address,
@@ -81,6 +100,7 @@ async function createHangout(req, res, next) {
       max_capacity: capacity,
       description,
       place,
+      thematic_id: anotherRow[0].id,
       title,
       photo_url,
       city_id: row[0].id,
