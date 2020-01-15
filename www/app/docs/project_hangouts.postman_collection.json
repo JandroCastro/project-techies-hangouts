@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6bfde51d-50cf-4e80-9f53-642fab20930b",
+		"_postman_id": "34d5ca3e-98ca-40f2-8346-5feff651b4f4",
 		"name": "project_hangouts",
 		"description": "Colección de querys de Postman para el proyecto",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -283,7 +283,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "  {\n  \t\"age\":\"3\",\n  \t\"name\": \"Alejandro Jose Sergio\",\n  \t\"category\": \"Senior Tech Leader de la ostia\",\n  \t\"position\": \"Jefazo máximo del lugar y la galaxia\",\n  \t\"about\": \"Somos tres chavales que queremos derrocar la  República\",\n  \t\"link\": \"https://github.com/JandroCastro/project-techies-hangouts\",\n  \t\"avatar\": \"https://images-na.ssl-images-amazon.com/images/I/41I7stkObXL.jpg\"\n  \t\n  }\n ",
+							"raw": "  {\n  \t\"age\":\"41\",\n  \t\"name\": \"Sergio Victoria\",\n  \t\"category\": \"Pringao\",\n  \t\"position\": \"Intentando mantenerme cuerdo\",\n  \t\"about\": \"Lunatico insensato que pensaba que iba a aprender a programar en 16 semanas\",\n  \t\"link\": \"https://www.linkedin.com/in/sergio-victoria-rodr%C3%ADguez-51b64a94/\",\n  }\n ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -356,7 +356,7 @@
 				{
 					"name": "avatar",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Authorization",
@@ -374,12 +374,12 @@
 							"formdata": [
 								{
 									"key": "avatar",
-									"value": "/home/hab42/project/project-techies-hangouts/www/app/docs/img/download.jpeg",
-									"type": "text"
+									"type": "file",
+									"src": "/home/hab29/Downloads/IMG-20190706-WA0000.jpeg"
 								},
 								{
 									"key": "title",
-									"value": "Homer",
+									"value": "Your Avatar",
 									"type": "text"
 								}
 							]
