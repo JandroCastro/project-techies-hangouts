@@ -3,6 +3,7 @@
 const mySqlPool = require("../../../database/mysql-pool");
 
 async function getHangoutsByQuery(req, res, next) {
+  console.log("hola");
   const filters = req.query;
   console.log(filters);
 
