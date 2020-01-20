@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "34d5ca3e-98ca-40f2-8346-5feff651b4f4",
+		"_postman_id": "6bfde51d-50cf-4e80-9f53-642fab20930b",
 		"name": "project_hangouts",
 		"description": "Colección de querys de Postman para el proyecto",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -70,13 +70,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}api/users/(id del usuario)",
+							"raw": "{{url}}api/users/{{userId}}",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
 								"users",
-								"(id del usuario)"
+								"{{userId}}"
 							]
 						},
 						"description": "Delete a user"
@@ -149,7 +149,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Cañas Javascript\",\n\t\"description\": \"Venga chavales, vamos a quedar a tomar unas cañas y ver la mierda de JS\",\n\t\"address\" : \"Manuel Murguía, 7\",\n\t\"city\": \"A Coruna\",\n\t\"place\": \"La Consentida\",\n\t\"photo_url\": \"https://unsplash.com/photos/ZHvM3XIOHoE\",\n\t\"date\" : \"2023-10-25\",\n\t\"hour\": \"20:00:00\",\n\t\"capacity\": \"8\"\n}",
+							"raw": "{\n\t\"title\": \"Cañas Javascript\",\n\t\"thematic\": \"css\",\n\t\"description\": \"Venga chavales, vamos a quedar a tomar unas cañas y ver la mierda de JS\",\n\t\"address\" : \"Manuel Murguía, 7\",\n\t\"city\": \"coruna\",\n\t\"place\": \"La Consentida\",\n\t\"photo_url\": \"https://unsplash.com/photos/ZHvM3XIOHoE\",\n\t\"date\" : \"2024-10-25\",\n\t\"hour\": \"20:00:00\",\n\t\"capacity\": \"8\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -195,6 +195,66 @@
 							]
 						},
 						"description": "Get all hangouts"
+					},
+					"response": []
+				},
+				{
+					"name": "hangoutsQ",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}api/hangouts",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"hangouts"
+							]
+						},
+						"description": "Get hangouts by query params"
+					},
+					"response": []
+				},
+				{
+					"name": "hangoutsT",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}api/hangouts/thematic/css",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"hangouts",
+								"thematic",
+								"css"
+							]
+						},
+						"description": "Get hangouts by thematic"
 					},
 					"response": []
 				},
@@ -283,7 +343,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "  {\n  \t\"age\":\"41\",\n  \t\"name\": \"Sergio Victoria\",\n  \t\"category\": \"Pringao\",\n  \t\"position\": \"Intentando mantenerme cuerdo\",\n  \t\"about\": \"Lunatico insensato que pensaba que iba a aprender a programar en 16 semanas\",\n  \t\"link\": \"https://www.linkedin.com/in/sergio-victoria-rodr%C3%ADguez-51b64a94/\",\n  }\n ",
+							"raw": "  {\n  \t\"age\":\"3\",\n  \t\"name\": \"Alejandro Jose Sergio\",\n  \t\"category\": \"Senior Tech Leader de la ostia\",\n  \t\"position\": \"Jefazo máximo del lugar y la galaxia\",\n  \t\"about\": \"Somos tres chavales que queremos derrocar la  República\",\n  \t\"link\": \"https://github.com/JandroCastro/project-techies-hangouts\"\n  }\n ",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -356,7 +416,7 @@
 				{
 					"name": "avatar",
 					"request": {
-						"method": "PUT",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Authorization",
@@ -374,12 +434,12 @@
 							"formdata": [
 								{
 									"key": "avatar",
-									"type": "file",
-									"src": "/home/hab29/Downloads/IMG-20190706-WA0000.jpeg"
+									"value": "/home/hab42/project/project-techies-hangouts/www/app/docs/img/download.jpeg",
+									"type": "text"
 								},
 								{
 									"key": "title",
-									"value": "Your Avatar",
+									"value": "Homer",
 									"type": "text"
 								}
 							]
@@ -400,6 +460,53 @@
 				}
 			],
 			"description": "Change profile avatar",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Ratings",
+			"item": [
+				{
+					"name": "Rating",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id_rated\" : \"4028a2f4-00a7-4f0e-9fcb-985f743b7a76\",\n\t\"rating\": 5\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/hangouts/{{hangoutId}}/rating",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"hangouts",
+								"{{hangoutId}}",
+								"rating"
+							]
+						},
+						"description": "Create Rating"
+					},
+					"response": []
+				}
+			],
 			"protocolProfileBehavior": {}
 		}
 	],
