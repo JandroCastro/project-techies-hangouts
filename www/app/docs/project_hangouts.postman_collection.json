@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "6bfde51d-50cf-4e80-9f53-642fab20930b",
+		"_postman_id": "b4b9df4f-111d-4e89-82dc-475ad68d144e",
 		"name": "project_hangouts",
 		"description": "Colección de querys de Postman para el proyecto",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -503,6 +503,76 @@
 							]
 						},
 						"description": "Create Rating"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Cities",
+			"item": [
+				{
+					"name": "Cities",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": " Bearer {{Token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}api/cities",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"cities"
+							]
+						},
+						"description": "get all cities"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Thematics",
+			"item": [
+				{
+					"name": "Thematics",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": " Bearer {{Token}}"
+							}
+						],
+						"url": {
+							"raw": "{{url}}api/thematics",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"thematics"
+							]
+						},
+						"description": "get all thematics"
 					},
 					"response": []
 				}
