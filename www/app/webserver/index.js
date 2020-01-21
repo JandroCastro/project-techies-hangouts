@@ -9,7 +9,8 @@ const {
   authRouter,
   profileRouter,
   ratingsRouter,
-  attendanceRouter
+  attendanceRouter,
+  auxRouter
 } = require("./routes");
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(express.json());
 
 app.use("/api", attendanceRouter);
 app.use("/api", authRouter);
+app.use("/api", auxRouter);
 app.use("/api", hangoutRouter);
 app.use("/api", profileRouter);
 app.use("/api", ratingsRouter);

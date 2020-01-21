@@ -6,6 +6,7 @@ const authRouter = require("./auth-router");
 const profileRouter = require("./profile-router");
 const ratingsRouter = require("./ratings-router");
 const auxRouter = require("./aux-router");
+const attendanceRouter = require("./attendance-router");
 
 module.exports = {
   userRouter,
@@ -13,5 +14,6 @@ module.exports = {
   authRouter,
   profileRouter,
   ratingsRouter,
-  auxRouter
+  auxRouter,
+  attendanceRouter
 };
