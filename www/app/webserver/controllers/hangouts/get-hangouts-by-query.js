@@ -2,47 +2,41 @@
 
 const mySqlPool = require("../../../database/mysql-pool");
 
+const filteringPayload (payload) => {
+  let sqlQuery = `SELECT * FROM EVENTS WHERE`
+
+  if(payload.city !== "TODAS"){
+    sqlQuery += "city_id = ?"
+  } 
+  else if(payload.thematics !== "TODAS"){
+    sqlQuery += "AND thematic_id = ?"
+  }
+  else if (payload.dates !== undefined) {
+   
+    sqlQuery += "AND event_date >= ? AND event_date <= ?" 
+  }
+  return sqlQuery
+}
+
 async function getHangoutsByQuery(req, res, next) {
-  console.log("hola");
   const filters = req.query;
   console.log(filters);
 
-  /* const now = new Date()
-        .toISOString()
-        .substring(0, 19)
-        .replace("T", " ")
-        .split(" ");
+  const filtersQuery = filteringPayload(filters)
 
-    const today = now[0];
-    const currentHour = now[1];
+  const { city, thematics, dates } = filters;
 
-    let connection;
-    try {
-        connection = await mySqlPool.getConnection();
-        const sqlQuery = `SELECT * FROM Events
-    WHERE city_id = ? 
-    AND event_date >= ? 
-    AND event_hour > ? 
-    ORDER BY event_date,event_hour ASC `;
+  const initialDate = dates.substring(0, 10);
+  const finalDate = dates.substring(11, 21);
 
-        const [rows] = await connection.execute(sqlQuery, [
-            cityId,
-            today,
-            currentHour
-        ]);
-        connection.release();
-        if (rows.length === 0) {
-            return res.status(404).send();
-        }
-        return res.send(rows);
-    } catch (e) {
-        if (connection) {
-            connection.release();
-        }
+ const connection = mySqlPool.getConnection();
+  try {
+     await connection.query(filtersQuery, {city, thematics, initialDate, finalDate});
+  } catch (e) {
+    console.error(e);
+    res.status(500).send();
+  }
 
-        console.error(e);
-        return res.status(500).send();
-    }*/
   res.send("Conectado");
 }
 
