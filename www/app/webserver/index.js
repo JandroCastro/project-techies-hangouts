@@ -8,18 +8,26 @@ const {
   authRouter,
   profileRouter,
   ratingsRouter,
+<<<<<<< HEAD
   auxRouter
+=======
+  attendanceRouter
+>>>>>>> 4fcdb56ec01d4f472ad81eb7e90a7ee633f54b0a
 } = require("./routes");
 
 const app = express();
 
 app.use(express.json());
+app.use("/api", attendanceRouter);
 app.use("/api", authRouter);
 app.use("/api", hangoutRouter);
-app.use("/api", userRouter);
 app.use("/api", profileRouter);
 app.use("/api", ratingsRouter);
+<<<<<<< HEAD
 app.use("/api", auxRouter);
+=======
+app.use("/api", userRouter);
+>>>>>>> 4fcdb56ec01d4f472ad81eb7e90a7ee633f54b0a
 
 let server = null;
 async function listen(port) {

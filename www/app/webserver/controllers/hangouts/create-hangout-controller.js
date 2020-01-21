@@ -64,35 +64,6 @@ async function createHangout(req, res, next) {
   const hangoutId = uuidV4();
   let connection;
   try {
-    connection = await mysqlPool.getConnection();
-    const consultCityIdQuery = `SELECT *
-      FROM Cities
-      WHERE
-      name = ?`;
-    const [row] = await connection.query(consultCityIdQuery, city);
-    connection.release();
-
-    if (row.length === 0) {
-      return res.status(400).send();
-    }
-
-    connection = await mysqlPool.getConnection();
-    const consultThematicIdQuery = `SELECT *
-      FROM Thematics
-      WHERE
-      name = ?`;
-    const [anotherRow] = await connection.query(
-      consultThematicIdQuery,
-      thematic
-    );
-    connection.release();
-
-    if (anotherRow.length === 0) {
-      return res.status(400).send();
-    }
-    console.log(anotherRow[0].id);
-    console.log(req.claims);
-
     const hangout = {
       id: hangoutId,
       address,
@@ -100,10 +71,10 @@ async function createHangout(req, res, next) {
       max_capacity: capacity,
       description,
       place,
-      thematic_id: anotherRow[0].id,
+      thematic_id: thematic,
       title,
       photo_url,
-      city_id: row[0].id,
+      city_id: city,
       event_hour: hour,
       created_at: now,
       user_id: userId
