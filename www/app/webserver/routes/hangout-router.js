@@ -5,7 +5,6 @@ const createHangout = require("../controllers/hangouts/create-hangout-controller
 const deleteHangout = require("../controllers/hangouts/delete-hangout-controller");
 const getHangout = require("../controllers/hangouts/get-hangout-controller");
 const getAllHangouts = require("../controllers/hangouts/get-all-hangouts-controller");
-
 const getHangoutsByQuery = require("../controllers/hangouts/get-hangouts-by-query");
 const router = express.Router();
 

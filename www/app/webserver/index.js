@@ -7,7 +7,8 @@ const {
   hangoutRouter,
   authRouter,
   profileRouter,
-  ratingsRouter
+  ratingsRouter,
+  auxRouter
 } = require("./routes");
 
 const app = express();
@@ -18,6 +19,7 @@ app.use("/api", hangoutRouter);
 app.use("/api", userRouter);
 app.use("/api", profileRouter);
 app.use("/api", ratingsRouter);
+app.use("/api", auxRouter);
 
 let server = null;
 async function listen(port) {
