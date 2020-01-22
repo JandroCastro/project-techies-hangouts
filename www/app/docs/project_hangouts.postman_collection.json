@@ -579,6 +579,92 @@
 			],
 			"protocolProfileBehavior": {}
 		}
+		{
+			"name": "Attendance",
+			"item": [
+				{
+					"name": "Attendance",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/hangouts/{{hangoutId}}",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"hangouts",
+								"{{hangoutId}}"
+							]
+						},
+						"description": "Anotarse a un evento"
+					},
+					"response": []
+				},
+				{
+					"name": "Attendance",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/hangouts/{{hangoutId}}",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"hangouts",
+								"{{hangoutId}}"
+							]
+						},
+						"description": "Anotarse a un evento"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
 	],
 	"protocolProfileBehavior": {}
 }
