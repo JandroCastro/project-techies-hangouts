@@ -3,7 +3,7 @@
 const mysqlPool = require("../../../database/mysql-pool");
 
 async function createAttendance(req, res, next) {
-  let { userId } = req.claims;
+  const { userId } = req.claims;
 
   const attendanceObject = {
     id_users: userId,
@@ -14,7 +14,7 @@ async function createAttendance(req, res, next) {
   try {
     const connection = await mysqlPool.getConnection();
     try {
-      const sqlCreateAttendance = "INSERT INTO Attendance SET ?";
+      const sqlCreateAttendance = `INSERT INTO Attendance SET ?`;
       await connection.query(sqlCreateAttendance, attendanceObject);
 
       connection.release();
