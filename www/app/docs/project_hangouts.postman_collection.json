@@ -665,6 +665,91 @@
 			],
 			"protocolProfileBehavior": {}
 		}
+		{
+			"name": "Attendance ok",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{Token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}api/hangouts/{{hangoutId}}/accepted",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"hangouts",
+						"{{hangoutId}}",
+						"accepted"
+					]
+				},
+				"description": "Aceptar la petición de asistir a un evento"
+			},
+			"response": []
+		},
+		{
+			"name": "Attendance ko",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{Token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}api/hangouts/{{hangoutId}}/rejected",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"hangouts",
+						"{{hangoutId}}",
+						"rejected"
+					]
+				},
+				"description": "Rechazar petición de asistencia a un evento"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
 	],
 	"protocolProfileBehavior": {}
 }
