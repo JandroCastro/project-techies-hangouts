@@ -2,9 +2,9 @@
 
 const express = require("express");
 const checkUserSession = require("../controllers/user/check-user-session");
-const acceptAttendance = require("../controllers/attendance/accept-attendance");
+const acceptAttendance = require("../controllers/attendance/accept-attendance-controller");
 const createAttendance = require("../controllers/attendance/create-attendance");
-const rejectAttendance = require("../controllers/attendance/reject-attendance");
+const rejectAttendance = require("../controllers/attendance/reject-attendance-controller");
 
 const router = express.Router();
 

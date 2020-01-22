@@ -6,6 +6,7 @@ const deleteHangout = require("../controllers/hangouts/delete-hangout-controller
 const getHangout = require("../controllers/hangouts/get-hangout-controller");
 const getAllHangouts = require("../controllers/hangouts/get-all-hangouts-controller");
 const getHangoutsByQuery = require("../controllers/hangouts/get-hangouts-by-query");
+const updateHangout = require("./../controllers/hangouts/update-hangout-controller");
 const router = express.Router();
 
 router.post("/hangouts", checkUserSession, createHangout);
@@ -13,5 +14,6 @@ router.get("/hangouts", checkUserSession, getAllHangouts);
 router.get("/hangouts/filter", checkUserSession, getHangoutsByQuery);
 router.get("/hangouts/:hangoutId", checkUserSession, getHangout);
 router.delete("/hangouts/:hangoutId", checkUserSession, deleteHangout);
+router.put("/hangouts/:hangoutId", checkUserSession, updateHangout);
 
 module.exports = router;
