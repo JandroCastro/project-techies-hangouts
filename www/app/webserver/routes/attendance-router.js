@@ -23,5 +23,4 @@ router.get(
   checkUserSession,
   getAcceptedAttendance
 );
-
 module.exports = router;
