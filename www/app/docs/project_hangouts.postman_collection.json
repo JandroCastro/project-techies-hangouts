@@ -578,7 +578,7 @@
 				}
 			],
 			"protocolProfileBehavior": {}
-		}
+		},
 		{
 			"name": "Attendance",
 			"item": [
@@ -664,7 +664,7 @@
 				}
 			],
 			"protocolProfileBehavior": {}
-		}
+		},
 		{
 			"name": "Attendance ok",
 			"request": {
