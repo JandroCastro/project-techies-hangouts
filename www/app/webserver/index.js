@@ -9,10 +9,6 @@ const {
   authRouter,
   profileRouter,
   ratingsRouter,
-<<<<<<< HEAD
-=======
-  attendanceRouter,
->>>>>>> 7d2037149a382239a0b2385a6e2ab981cc16d07f
   auxRouter
 } = require("./routes");
 
@@ -27,11 +23,7 @@ app.use("/api", auxRouter);
 app.use("/api", hangoutRouter);
 app.use("/api", profileRouter);
 app.use("/api", ratingsRouter);
-<<<<<<< HEAD
 app.use("/api", auxRouter);
-=======
-app.use("/api", userRouter);
->>>>>>> 7d2037149a382239a0b2385a6e2ab981cc16d07f
 
 let server = null;
 async function listen(port) {
