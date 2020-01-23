@@ -10,16 +10,24 @@ const getAcceptedAttendance = require("../controllers/attendance/get-accepted-at
 
 const router = express.Router();
 
-router.post("/hangouts/:hangoutId", checkUserSession, createAttendance);
-router.put("/hangouts/:hangoutId/accepted", checkUserSession, acceptAttendance);
-router.put("/hangouts/:hangoutId/rejected", checkUserSession, rejectAttendance);
+router.post("/attendance/:hangoutId", checkUserSession, createAttendance);
+router.put(
+  "/attendance/accepted/:hangoutId",
+  checkUserSession,
+  acceptAttendance
+);
+router.put(
+  "/attendance/rejected/:hangoutId",
+  checkUserSession,
+  rejectAttendance
+);
 router.get(
-  "/hangouts/pending/:hangoutId",
+  "/attendance/pending/:hangoutId",
   checkUserSession,
   getPendingAttendance
 );
 router.get(
-  "/hangouts/accepted/:hangoutId",
+  "/attendance/accepted/:hangoutId",
   checkUserSession,
   getAcceptedAttendance
 );

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b4b9df4f-111d-4e89-82dc-475ad68d144e",
+		"_postman_id": "673b3db8-eb9e-4160-a386-efad2fcb662e",
 		"name": "project_hangouts",
 		"description": "Colección de querys de Postman para el proyecto",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -172,6 +172,46 @@
 				{
 					"name": "hangouts",
 					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Cañas en la de Rita\",\n\t\"thematic\": \"css\",\n\t\"description\": \"Venga chavales, vamos al lío\",\n\t\"address\" : \"Manuel Murguía, 7\",\n\t\"city\": \"coruna\",\n\t\"place\": \"La Consentida\",\n\t\"photo_url\": \"https://unsplash.com/photos/ZHvM3XIOHoE\",\n\t\"date\" : \"2024-10-25\",\n\t\"hour\": \"20:00:00\",\n\t\"capacity\": \"8\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/hangouts/{{hangoutId}}",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"hangouts",
+								"{{hangoutId}}"
+							]
+						},
+						"description": "Update  hangout"
+					},
+					"response": []
+				},
+				{
+					"name": "hangouts",
+					"request": {
 						"method": "GET",
 						"header": [
 							{
@@ -215,46 +255,30 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}api/hangouts",
-							"host": [
-								"{{url}}api"
-							],
-							"path": [
-								"hangouts"
-							]
-						},
-						"description": "Get hangouts by query params"
-					},
-					"response": []
-				},
-				{
-					"name": "hangoutsT",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"type": "text",
-								"value": "Bearer {{Token}}"
-							},
-							{
-								"key": "Content-Type",
-								"type": "text",
-								"value": "application/json"
-							}
-						],
-						"url": {
-							"raw": "{{url}}api/hangouts/thematic/css",
+							"raw": "{{url}}api/hangouts/filter?city={{cityId}}&thematic={{thematicId}}&dates=2019-01-01:2027-01-01",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
 								"hangouts",
-								"thematic",
-								"css"
+								"filter"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "{{cityId}}"
+								},
+								{
+									"key": "thematic",
+									"value": "{{thematicId}}"
+								},
+								{
+									"key": "dates",
+									"value": "2019-01-01:2027-01-01"
+								}
 							]
 						},
-						"description": "Get hangouts by thematic"
+						"description": "Get hangouts by query params"
 					},
 					"response": []
 				},
@@ -492,14 +516,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}api/hangouts/{{hangoutId}}/rating",
+							"raw": "{{url}}api/rating/{{hangoutId}}",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
-								"hangouts",
-								"{{hangoutId}}",
-								"rating"
+								"rating",
+								"{{hangoutId}}"
 							]
 						},
 						"description": "Create Rating"
@@ -609,12 +632,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}api/hangouts/{{hangoutId}}",
+							"raw": "{{url}}api/attendance/{{hangoutId}}",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
-								"hangouts",
+								"attendance",
 								"{{hangoutId}}"
 							]
 						},
@@ -623,7 +646,7 @@
 					"response": []
 				},
 				{
-					"name": "Attendance",
+					"name": "Attendance ok",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -649,103 +672,151 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}api/hangouts/{{hangoutId}}",
+							"raw": "{{url}}api/attendance/accepted/{{hangoutId}}",
 							"host": [
 								"{{url}}api"
 							],
 							"path": [
-								"hangouts",
+								"attendance",
+								"accepted",
 								"{{hangoutId}}"
 							]
 						},
-						"description": "Anotarse a un evento"
+						"description": "Aceptar la petición de asistir a un evento"
+					},
+					"response": []
+				},
+				{
+					"name": "Attendance ko",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/attendance/rejected/{{hangoutId}}",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"attendance",
+								"rejected",
+								"{{hangoutId}}"
+							]
+						},
+						"description": "Rechazar petición de asistencia a un evento"
+					},
+					"response": []
+				},
+				{
+					"name": "Attendance pending",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/attendance/pending/{{hangoutId}}",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"attendance",
+								"pending",
+								"{{hangoutId}}"
+							]
+						},
+						"description": "Obtener listado de todas las peticiones de asistencia a evento pendientes"
+					},
+					"response": []
+				},
+				{
+					"name": "Attendance accepted",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/attendance/accepted/{{hangoutId}}",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"attendance",
+								"accepted",
+								"{{hangoutId}}"
+							]
+						},
+						"description": "Obtener listado de todas las peticiones de asistencia a evento aceptadas"
 					},
 					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Attendance ok",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"type": "text",
-						"value": "Bearer {{Token}}"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{url}}api/hangouts/{{hangoutId}}/accepted",
-					"host": [
-						"{{url}}api"
-					],
-					"path": [
-						"hangouts",
-						"{{hangoutId}}",
-						"accepted"
-					]
-				},
-				"description": "Aceptar la petición de asistir a un evento"
-			},
-			"response": []
-		},
-		{
-			"name": "Attendance ko",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					},
-					{
-						"key": "Authorization",
-						"type": "text",
-						"value": "Bearer {{Token}}"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "{{url}}api/hangouts/{{hangoutId}}/rejected",
-					"host": [
-						"{{url}}api"
-					],
-					"path": [
-						"hangouts",
-						"{{hangoutId}}",
-						"rejected"
-					]
-				},
-				"description": "Rechazar petición de asistencia a un evento"
-			},
-			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}
