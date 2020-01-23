@@ -2,8 +2,8 @@
 const express = require("express");
 const checkUserSession = require("../controllers/user/check-user-session");
 
-const getAllCities = require("../controllers/hangouts/get-all-cities-controller");
-const getAllThematics = require("../controllers/hangouts/get-all-thematics-controller");
+const getAllCities = require("../controllers/aux/get-all-cities-controller");
+const getAllThematics = require("../controllers/aux/get-all-thematics-controller");
 
 const router = express.Router();
 

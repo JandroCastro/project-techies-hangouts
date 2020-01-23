@@ -1,10 +1,7 @@
 "use strict";
 
 const Joi = require("@hapi/joi");
-const uuidV4 = require("uuid/v4");
 const mysqlPool = require("../../../database/mysql-pool");
-
-const httpServerDomain = process.env.HTTP_SERVER_DOMAIN;
 
 async function validate(payload) {
   const schema = Joi.object({
@@ -43,6 +40,8 @@ async function createRating(req, res, next) {
   try {
     const sqlInsertRatingQuery = `INSERT INTO Ratings SET ?`;
     await connection.query(sqlInsertRatingQuery, ratingObject);
+
+    connection.release();
   } catch (e) {
     console.error(e);
     res.status(500).send();

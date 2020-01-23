@@ -4,12 +4,13 @@ const express = require("express");
 const cors = require("cors");
 
 const {
-  userRouter,
-  hangoutRouter,
+  attendanceRouter,
   authRouter,
+  auxRouter,
+  hangoutRouter,
   profileRouter,
   ratingsRouter,
-  auxRouter
+  userRouter
 } = require("./routes");
 
 const app = express();
@@ -23,7 +24,7 @@ app.use("/api", auxRouter);
 app.use("/api", hangoutRouter);
 app.use("/api", profileRouter);
 app.use("/api", ratingsRouter);
-app.use("/api", auxRouter);
+app.use("/api", userRouter);
 
 let server = null;
 async function listen(port) {

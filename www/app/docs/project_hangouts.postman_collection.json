@@ -149,7 +149,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Cañas Javascript\",\n\t\"thematic\": \"css\",\n\t\"description\": \"Venga chavales, vamos a quedar a tomar unas cañas y ver la mierda de JS\",\n\t\"address\" : \"Manuel Murguía, 7\",\n\t\"city\": \"coruna\",\n\t\"place\": \"La Consentida\",\n\t\"photo_url\": \"https://unsplash.com/photos/ZHvM3XIOHoE\",\n\t\"date\" : \"2024-10-25\",\n\t\"hour\": \"20:00:00\",\n\t\"capacity\": \"8\"\n}",
+							"raw": "{\n\t\"title\": \"Cañas Javascript\",\n\t\"thematic\": \"1680c313-c7af-497a-b05f-b376c773b038\",\n\t\"description\": \"Venga chavales, vamos a quedar a tomar unas cañas y ver la mierda de JS\",\n\t\"address\" : \"Manuel Murguía, 7\",\n\t\"city\": \"5a3837fa-b4da-4550-b177-9c30c505cd52\",\n\t\"place\": \"La Consentida\",\n\t\"photo_url\": \"https://unsplash.com/photos/ZHvM3XIOHoE\",\n\t\"date\" : \"2024-10-25\",\n\t\"hour\": \"20:00:00\",\n\t\"capacity\": \"8\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -188,7 +188,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Cañas en la de Rita\",\n\t\"thematic\": \"css\",\n\t\"description\": \"Venga chavales, vamos al lío\",\n\t\"address\" : \"Manuel Murguía, 7\",\n\t\"city\": \"coruna\",\n\t\"place\": \"La Consentida\",\n\t\"photo_url\": \"https://unsplash.com/photos/ZHvM3XIOHoE\",\n\t\"date\" : \"2024-10-25\",\n\t\"hour\": \"20:00:00\",\n\t\"capacity\": \"8\"\n}",
+							"raw": "{\n\t\"title\": \"Cañas en la de Rita\",\n\t\"thematic\": \"1680c313-c7af-497a-b05f-b376c773b038\",\n\t\"description\": \"Venga chavales, vamos al lío\",\n\t\"address\" : \"Manuel Murguía, 7\",\n\t\"city\": \"5a3837fa-b4da-4550-b177-9c30c505cd52\",\n\t\"place\": \"La Consentida\",\n\t\"photo_url\": \"https://unsplash.com/photos/ZHvM3XIOHoE\",\n\t\"date\" : \"2024-10-25\",\n\t\"hour\": \"20:00:00\",\n\t\"capacity\": \"8\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -526,6 +526,49 @@
 							]
 						},
 						"description": "Create Rating"
+					},
+					"response": []
+				},
+				{
+					"name": "Rating",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/rating/{{userId}}",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"rating",
+								"{{userId}}"
+							]
+						},
+						"description": "Get Rating for an user"
 					},
 					"response": []
 				}
