@@ -102,10 +102,10 @@ CREATE TABLE IF NOT EXISTS `project`.`Attendance` (
   `request_status` VARCHAR(10) NOT NULL DEFAULT "pending",
   PRIMARY KEY (`id_users`, `event_id`),
   INDEX `event_id` (`event_id` ASC),
-  CONSTRAINT `Users_Events_ibfk_1`
+  CONSTRAINT `Attendance_ibfk_1`
     FOREIGN KEY (`id_users`)
     REFERENCES `project`.`Users` (`id`),
-  CONSTRAINT `Users_Events_ibfk_2`
+  CONSTRAINT `Attendance_ibfk_2`
     FOREIGN KEY (`event_id`)
     REFERENCES `project`.`Events` (`id`))
 ENGINE = InnoDB

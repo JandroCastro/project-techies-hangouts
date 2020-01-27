@@ -4,9 +4,10 @@ const mysqlPool = require("../../../database/mysql-pool");
 
 async function acceptAttendance(req, res, next) {
   let { userId } = req.claims;
+  const { hangoutId } = req.params;
 
   const id_users = userId;
-  const event_id = req.params;
+  const event_id = hangoutId;
 
   try {
     const connection = await mysqlPool.getConnection();
