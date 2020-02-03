@@ -4,6 +4,7 @@ const Joi = require("@hapi/joi");
 const mysqlPool = require("../../../database/mysql-pool");
 const sengridMail = require("@sendgrid/mail");
 const uuidv4 = require("uuid/v4");
+const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
 const httpServerDomain = process.env.HTTP_SERVER_DOMAIN;
@@ -42,12 +43,6 @@ async function createUser(req, res, next) {
 
   try {
     await validate(userData);
-    /**
-     * At this point, note was created, so,
-     * we can associate the tags
-     *  - insertar relacíon entre tag y note en la tabla notes_tags
-     *  - note_id, tag_id, created_at
-     */
   } catch (e) {
     console.error(e);
     return res.status(400).send(e);
@@ -61,18 +56,20 @@ async function createUser(req, res, next) {
   const salt = 10;
   const bcryptedPassword = await bcrypt.hash(userData.password, salt);
 
+  const userInfo = {
+    id: userId,
+    email: userData.email,
+    password: bcryptedPassword,
+    created_at: now
+  };
+
   let connection;
   try {
     const connection = await mysqlPool.getConnection();
 
     try {
       const sqlCreateUser = `INSERT INTO Users SET ?`;
-      await connection.query(sqlCreateUser, {
-        id: userId,
-        email: userData.email,
-        password: bcryptedPassword,
-        created_at: now
-      });
+      await connection.query(sqlCreateUser, userInfo);
 
       try {
         const sqlCreateProfile = `INSERT INTO Profiles SET ?`;
@@ -92,8 +89,23 @@ async function createUser(req, res, next) {
 
     connection.release();
 
+    const payloadJwt = {
+      userId
+    };
+
+    const jwtExpiresIn = parseInt(process.env.AUTH_ACCESS_TOKEN_TTL);
+    const token = jwt.sign(payloadJwt, process.env.AUTH_JWT_SECRET, {
+      expiresIn: jwtExpiresIn
+    });
+
     res.header("Location", `${httpServerDomain}/api/users/${userId}`);
-    res.status(201).send(userId);
+
+    return res.status(201).send({
+      accessToken: token,
+      userId,
+      email: userData.email
+    });
+
     /**
      * Pongo que me devuelva userId para poder guardar en la
      * variable de entorno de Postman y poder seguir probando
