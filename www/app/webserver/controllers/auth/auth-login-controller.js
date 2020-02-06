@@ -63,7 +63,7 @@ async function login(req, res, next) {
     });
 
     return res.send({
-      accessToken: token,
+      token,
 
       expiresIn: jwtExpiresIn
     });
