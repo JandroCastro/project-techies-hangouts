@@ -2,15 +2,15 @@
 
 const mySqlPool = require("../../../database/mysql-pool");
 
-async function getHangout(req, res, next) {
-  const { hangoutId } = req.params;
+async function getOrganizedHangouts(req, res, next) {
+  const { userId } = req.params;
 
   let connection;
   try {
     connection = await mySqlPool.getConnection();
-    const sqlQuery = `SELECT * FROM Events WHERE id = ? AND deleted_at IS null`;
+    const sqlQuery = `SELECT * FROM Events WHERE user_id = ? AND deleted_at IS null`;
 
-    const [rows] = await connection.execute(sqlQuery, [hangoutId]);
+    const [rows] = await connection.execute(sqlQuery, [userId]);
     connection.release();
     if (rows.length === 0) {
       return res.status(404).send();
@@ -26,4 +26,4 @@ async function getHangout(req, res, next) {
   }
 }
 
-module.exports = getHangout;
+module.exports = getOrganizedHangouts;

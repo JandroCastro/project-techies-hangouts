@@ -7,9 +7,15 @@ const getHangout = require("../controllers/hangouts/get-hangout-controller");
 const getAllHangouts = require("../controllers/hangouts/get-all-hangouts-controller");
 const getHangoutsByQuery = require("../controllers/hangouts/get-hangouts-by-query");
 const updateHangout = require("./../controllers/hangouts/update-hangout-controller");
+const getOrganizedHangouts = require("../controllers/hangouts/get-organized-hangouts-controller");
 const router = express.Router();
 
 router.post("/hangouts", checkUserSession, createHangout);
+router.get(
+  "/hangouts/organized/:userId",
+  checkUserSession,
+  getOrganizedHangouts
+);
 router.get("/hangouts", checkUserSession, getAllHangouts);
 router.get("/hangouts/filter", checkUserSession, getHangoutsByQuery);
 router.get("/hangouts/:hangoutId", checkUserSession, getHangout);

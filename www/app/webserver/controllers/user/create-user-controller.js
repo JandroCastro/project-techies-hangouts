@@ -101,7 +101,7 @@ async function createUser(req, res, next) {
     res.header("Location", `${httpServerDomain}/api/users/${userId}`);
 
     return res.status(201).send({
-      accessToken: token,
+      token,
       userId,
       email: userData.email
     });
