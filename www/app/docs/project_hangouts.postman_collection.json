@@ -255,7 +255,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}api/hangouts/filter?city={{cityId}}&thematic={{thematicId}}&dates=2019-01-01:2027-01-01",
+							"raw": "{{url}}api/hangouts/filter?city_id={{cityId}}&thematic_id={{thematicId}}&event_date1=2019-01-01&event_date2=2027-01-01",
 							"host": [
 								"{{url}}api"
 							],
@@ -265,16 +265,20 @@
 							],
 							"query": [
 								{
-									"key": "city",
+									"key": "city_id",
 									"value": "{{cityId}}"
 								},
 								{
-									"key": "thematic",
+									"key": "thematic_id",
 									"value": "{{thematicId}}"
 								},
 								{
-									"key": "dates",
-									"value": "2019-01-01:2027-01-01"
+									"key": "event_date1",
+									"value": "2019-01-01"
+								},
+								{
+									"key": "event_date2",
+									"value": "2027-01-01"
 								}
 							]
 						},
@@ -309,6 +313,37 @@
 							]
 						},
 						"description": "Get one hangout by id"
+					},
+					"response": []
+				},
+				{
+					"name": "Organized hangouts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{Token}}"
+							},
+							{
+								"key": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{url}}api/hangouts/organized/{{userId}}",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"hangouts",
+								"organized",
+								"{{userId}}"
+							]
+						},
+						"description": "Get all hangouts organized by one user"
 					},
 					"response": []
 				},
