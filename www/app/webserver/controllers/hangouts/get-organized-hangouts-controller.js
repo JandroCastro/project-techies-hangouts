@@ -8,7 +8,7 @@ async function getOrganizedHangouts(req, res, next) {
   let connection;
   try {
     connection = await mySqlPool.getConnection();
-    const sqlQuery = `SELECT * FROM Events WHERE user_id = ?`;
+    const sqlQuery = `SELECT * FROM Events WHERE user_id = ? AND deleted_at IS null`;
 
     const [rows] = await connection.execute(sqlQuery, [userId]);
     connection.release();

@@ -8,7 +8,7 @@ async function getHangout(req, res, next) {
   let connection;
   try {
     connection = await mySqlPool.getConnection();
-    const sqlQuery = `SELECT * FROM Events WHERE id = ?`;
+    const sqlQuery = `SELECT * FROM Events WHERE id = ? AND deleted_at IS null`;
 
     const [rows] = await connection.execute(sqlQuery, [hangoutId]);
     connection.release();

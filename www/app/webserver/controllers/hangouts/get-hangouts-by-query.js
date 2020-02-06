@@ -3,7 +3,7 @@
 const mySqlPool = require("../../../database/mysql-pool");
 
 function payloadToQuery(payload) {
-  const query = "SELECT * FROM Events WHERE";
+  const query = "SELECT * FROM Events WHERE deleted_at IS null and";
 
   const arrObject = [];
 
