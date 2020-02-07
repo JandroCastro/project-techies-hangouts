@@ -7,6 +7,7 @@ const createAttendance = require("../controllers/attendance/create-attendance");
 const rejectAttendance = require("../controllers/attendance/reject-attendance-controller");
 const getPendingAttendance = require("../controllers/attendance/get-pending-attendance-controller");
 const getAcceptedAttendance = require("../controllers/attendance/get-accepted-attendance-controller");
+const getAllAttendance = require("../controllers/attendance/get-all-attendance");
 
 const router = express.Router();
 
@@ -31,4 +32,6 @@ router.get(
   checkUserSession,
   getAcceptedAttendance
 );
+router.get("/attendance/:userId", checkUserSession, getAllAttendance);
+
 module.exports = router;
