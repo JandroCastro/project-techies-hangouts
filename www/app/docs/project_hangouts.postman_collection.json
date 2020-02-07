@@ -104,7 +104,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jandroportonovo36@yopmail.com\",\n\t\"password\": \"Portonovo1993\"\n}",
+							"raw": "{\n\t\"email\": \"jandroportonovo1@yopmail.com\",\n\t\"password\": \"Portonovo1993\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -475,7 +475,7 @@
 				{
 					"name": "avatar",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Authorization",
@@ -514,6 +514,44 @@
 							]
 						},
 						"description": "change profile avatar"
+					},
+					"response": []
+				},
+				{
+					"name": "avatar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}api/profiles/avatar/{{userId}}",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"profiles",
+								"avatar",
+								"{{userId}}"
+							]
+						},
+						"description": "get profile avatar"
 					},
 					"response": []
 				}
