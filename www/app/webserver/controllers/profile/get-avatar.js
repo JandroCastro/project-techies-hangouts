@@ -2,13 +2,13 @@
 
 const mySqlPool = require("../../../database/mysql-pool");
 
-async function getProfile(req, res, next) {
+async function getAvatar(req, res, next) {
   const { userId } = req.params;
 
   let connection;
   try {
     connection = await mySqlPool.getConnection();
-    const sqlQuery = `SELECT * FROM Profiles WHERE user_id = ?`;
+    const sqlQuery = `SELECT avatar_url FROM Profiles WHERE user_id = ?`;
     const [rows] = await connection.query(sqlQuery, userId);
     connection.release();
     if (rows.length === 0) {
@@ -23,4 +23,4 @@ async function getProfile(req, res, next) {
     return res.status(500).send();
   }
 }
-module.exports = getProfile;
+module.exports = getAvatar;
