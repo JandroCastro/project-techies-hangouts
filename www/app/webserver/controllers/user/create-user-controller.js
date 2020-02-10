@@ -9,7 +9,7 @@ const bcrypt = require("bcrypt");
 
 const httpServerDomain = process.env.HTTP_SERVER_DOMAIN;
 const defaultImageUrl =
-  "https://www.freepik.es/vector-premium/avatar-hombre-negocios_2781932.htm";
+  "https://image.freepik.com/vector-gratis/avatar-hombre-negocios_24908-26533.jpg";
 
 sengridMail.setApiKey(process.env.SENGRID_API_KEY);
 
