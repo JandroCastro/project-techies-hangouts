@@ -45,7 +45,7 @@ async function validate(payload) {
 
 async function updateProfile(req, res, next) {
   const profileData = { ...req.body };
-  const { profileId } = req.params;
+  const { userId } = req.params;
   console.log(req.params);
 
   try {
@@ -78,7 +78,7 @@ async function updateProfile(req, res, next) {
     SET ?
     WHERE user_id = ?`;
     try {
-      await connection.query(sqlQuery, [profile, profileId]);
+      await connection.query(sqlQuery, [profile, userId]);
     } catch (e) {
       console.error(e);
       throw e;

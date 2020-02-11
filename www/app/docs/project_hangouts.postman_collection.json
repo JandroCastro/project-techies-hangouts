@@ -104,7 +104,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"jandroportonovo36@yopmail.com\",\n\t\"password\": \"Portonovo1993\"\n}",
+							"raw": "{\n\t\"email\": \"jandroportonovo1@yopmail.com\",\n\t\"password\": \"Portonovo1993\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -475,7 +475,7 @@
 				{
 					"name": "avatar",
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Authorization",
@@ -514,6 +514,44 @@
 							]
 						},
 						"description": "change profile avatar"
+					},
+					"response": []
+				},
+				{
+					"name": "avatar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{url}}api/profiles/avatar/{{userId}}",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"profiles",
+								"avatar",
+								"{{userId}}"
+							]
+						},
+						"description": "get profile avatar"
 					},
 					"response": []
 				}
@@ -846,6 +884,49 @@
 							]
 						},
 						"description": "Obtener listado de todas las peticiones de asistencia a evento pendientes"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all attendance",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{Token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/attendance/{{userId}}",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"attendance",
+								"{{userId}}"
+							]
+						},
+						"description": "Get all attendance from an user"
 					},
 					"response": []
 				},
