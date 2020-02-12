@@ -45,6 +45,43 @@
 				},
 				{
 					"name": "users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"jandroportonovo30@yopmail.com\",\n\t\"password\": \"Portonovo1993\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}api/users",
+							"host": [
+								"{{url}}api"
+							],
+							"path": [
+								"users"
+							]
+						},
+						"description": "Get user for login"
+					},
+					"response": []
+				},
+				{
+					"name": "users",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -149,7 +186,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Cañas Javascript\",\n\t\"thematic\": \"1680c313-c7af-497a-b05f-b376c773b038\",\n\t\"description\": \"Venga chavales, vamos a quedar a tomar unas cañas y ver la mierda de JS\",\n\t\"address\" : \"Manuel Murguía, 7\",\n\t\"city\": \"5a3837fa-b4da-4550-b177-9c30c505cd52\",\n\t\"place\": \"La Consentida\",\n\t\"photo_url\": \"https://unsplash.com/photos/ZHvM3XIOHoE\",\n\t\"date\" : \"2024-10-25\",\n\t\"hour\": \"20:00:00\",\n\t\"capacity\": \"8\"\n}",
+							"raw": "{\n\t\"title\": \"Maravilla\",\n\t\"thematic\": \"https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80\",\n\t\"description\": \"Venga chavales, vamos a quedar a tomar unas cañas y ver la mierda de JS\",\n\t\"address\" : \"Manuel Murguía, 7\",\n\t\"city\": \"5a3837fa-b4da-4550-b177-9c30c505cd52\",\n\t\"place\": \"La Consentida\",\n\t\"photo_url\": \"https://unsplash.com/photos/ZHvM3XIOHoE\",\n\t\"date\" : \"2024-10-25\",\n\t\"hour\": \"20:00:00\",\n\t\"capacity\": \"8\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
