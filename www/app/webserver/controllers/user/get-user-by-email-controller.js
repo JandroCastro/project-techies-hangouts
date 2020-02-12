@@ -29,7 +29,7 @@ async function getUser(req, res, next) {
       if (response) {
         return res.status(200).send();
       } else {
-        return res.status(404).send();
+        return res.status(400).send();
       }
     });
   } catch (e) {
