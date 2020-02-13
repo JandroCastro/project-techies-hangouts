@@ -3,8 +3,8 @@
 const mySqlPool = require("../../../database/mysql-pool");
 
 async function getThematicName(req, res, next) {
-  const { id } = { ...req.body };
-
+  const { thematic_id } = { ...req.params };
+  const id = thematic_id;
   let connection;
   try {
     connection = await mySqlPool.getConnection();

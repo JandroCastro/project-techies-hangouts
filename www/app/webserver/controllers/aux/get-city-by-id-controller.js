@@ -3,12 +3,17 @@
 const mySqlPool = require("../../../database/mysql-pool");
 
 async function getCityName(req, res, next) {
-  const { id } = { ...req.body };
+  console.log("hola");
+  const { city_id } = { ...req.params };
+  console.log(req.params);
+
+  const id = city_id;
+  console.log(id);
 
   let connection;
   try {
     connection = await mySqlPool.getConnection();
-    const sqlQuery = `SELECT name FROM Cities WHERE id = ?`;
+    const sqlQuery = `SELECT name FROM Cities WHERE id =?`;
 
     const [rows] = await connection.query(sqlQuery, [id]);
     connection.release();

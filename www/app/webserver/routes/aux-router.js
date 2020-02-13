@@ -9,8 +9,8 @@ const getThematicName = require("../controllers/aux/get-thematic-by-id-controlle
 
 const router = express.Router();
 
-router.get("/city", checkUserSession, getCityName);
-router.get("/thematic", checkUserSession, getThematicName);
+router.get("/city/:city_id", checkUserSession, getCityName);
+router.get("/thematic/:thematic_id", checkUserSession, getThematicName);
 router.get("/allcities", checkUserSession, getAllCities);
 router.get("/allthematics", checkUserSession, getAllThematics);
 
