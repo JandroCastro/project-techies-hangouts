@@ -9,8 +9,8 @@ async function getUser(req, res, next) {
   let connection;
   try {
     connection = await mySqlPool.getConnection();
-    const sqlQuery = `SELECT * FROM Users WHERE email = ? AND deleted_at IS null`;
-    const [rows] = await connection.query(sqlQuery, email);
+    const sqlQuery = `SELECT * FROM Users WHERE email= ? AND deleted_at IS null`;
+    const [rows] = await connection.query(sqlQuery, [email]);
     connection.release();
 
     /**
@@ -19,23 +19,25 @@ async function getUser(req, res, next) {
      */
 
     if (rows.length === 0) {
-      return res.status(404).send();
+      return res.status(401).send();
     }
 
     bcrypt.compare(password, rows[0].password, function(err, response) {
       if (err) {
+        console.log(err);
         return res.status(500).send();
       }
       if (response) {
         return res.status(200).send();
       } else {
-        return res.status(400).send();
+        return res.status(401).send();
       }
     });
   } catch (e) {
     if (connection) {
       connection.release();
     }
+    console.error(e);
     return res.status(500).send();
   }
 }

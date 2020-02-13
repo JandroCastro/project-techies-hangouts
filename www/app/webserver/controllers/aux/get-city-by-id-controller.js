@@ -1,0 +1,34 @@
+"use strict";
+
+const mySqlPool = require("../../../database/mysql-pool");
+
+async function getCityName(req, res, next) {
+  console.log("hola");
+  const { city_id } = { ...req.params };
+  console.log(req.params);
+
+  const id = city_id;
+  console.log(id);
+
+  let connection;
+  try {
+    connection = await mySqlPool.getConnection();
+    const sqlQuery = `SELECT name FROM Cities WHERE id =?`;
+
+    const [rows] = await connection.query(sqlQuery, [id]);
+    connection.release();
+    if (rows.length === 0) {
+      return res.status(404).send();
+    }
+    return res.send(rows);
+  } catch (e) {
+    if (connection) {
+      connection.release();
+    }
+
+    console.error(e);
+    return res.status(500).send();
+  }
+}
+
+module.exports = getCityName;

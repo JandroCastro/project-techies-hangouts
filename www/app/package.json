@@ -22,7 +22,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "stop": "lsof -ti :8000 | xargs kill -9 && echo '> Server stopped' || echo '> Failed to stop, is it already stopped?'"
   },
   "author": "",
   "license": "ISC"
