@@ -8,7 +8,7 @@ const getUser = require("../controllers/user/get-user-by-email-controller");
 const router = express.Router();
 
 router.delete("/users/:userId", deleteUser);
-router.get("/users", getUser);
+router.post("/users/get", getUser);
 router.post("/users", createUser);
 
 module.exports = router;
