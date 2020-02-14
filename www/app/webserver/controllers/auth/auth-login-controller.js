@@ -30,8 +30,8 @@ async function login(req, res, next) {
 
   try {
     const connection = await mysqlPool.getConnection();
-    // connection.query devuelve: [[filaEncontrada], [c1Metadata, cNmetadata]]
     const [rows] = await connection.query(sqlQuery);
+
     connection.release();
 
     if (rows.length !== 1) {
@@ -64,6 +64,8 @@ async function login(req, res, next) {
 
     return res.send({
       token,
+      id: user.id,
+      email: user.email,
 
       expiresIn: jwtExpiresIn
     });
