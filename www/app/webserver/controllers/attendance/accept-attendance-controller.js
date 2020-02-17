@@ -3,7 +3,7 @@
 const mysqlPool = require("../../../database/mysql-pool");
 
 async function acceptAttendance(req, res, next) {
-  let { userId } = req.claims;
+  let { userId } = { ...req.body };
   const { hangoutId } = req.params;
 
   const id_users = userId;
