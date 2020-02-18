@@ -11,9 +11,10 @@ function payloadToQuery(payload) {
     let data = {
       column: property,
       value: payload[property],
-      operator: " "
+      operator: "="
     };
 
+    /* Si metemos rango de fechas usaría este
     if (data.column === "event_date1") {
       data.operator = ">=";
       data.column = "event_date";
@@ -23,7 +24,7 @@ function payloadToQuery(payload) {
     } else {
       data.operator = "=";
     }
-
+*/
     arrObject.push(data);
   }
 
