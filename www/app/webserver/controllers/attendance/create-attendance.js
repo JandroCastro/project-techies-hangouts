@@ -26,6 +26,9 @@ async function createAttendance(req, res, next) {
     }
   } catch (e) {
     console.error(e);
+    if (e.code === "ER_DUP_ENTRY") {
+      return res.status(409).send();
+    }
     return res.status(500).send();
   }
 }

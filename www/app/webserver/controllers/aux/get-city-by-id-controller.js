@@ -3,12 +3,9 @@
 const mySqlPool = require("../../../database/mysql-pool");
 
 async function getCityName(req, res, next) {
-  console.log("hola");
   const { city_id } = { ...req.params };
-  console.log(req.params);
 
   const id = city_id;
-  console.log(id);
 
   let connection;
   try {
