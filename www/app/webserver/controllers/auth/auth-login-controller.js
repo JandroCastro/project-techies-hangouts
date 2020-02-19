@@ -64,7 +64,7 @@ async function login(req, res, next) {
 
     return res.send({
       token,
-      id: user.id,
+      userId: user.id,
       email: user.email,
 
       expiresIn: jwtExpiresIn
