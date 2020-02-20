@@ -51,6 +51,7 @@ async function updateProfile(req, res, next) {
   try {
     await validate(profileData);
   } catch (e) {
+    console.error(e)
     return res.status(400).send(e);
   }
 
