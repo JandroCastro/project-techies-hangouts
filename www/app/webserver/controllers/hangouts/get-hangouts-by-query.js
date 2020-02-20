@@ -4,7 +4,7 @@ const mySqlPool = require("../../../database/mysql-pool");
 
 function payloadToQuery(payload) {
   const query =
-    "SELECT e.id, title, description, e.user_id, city_id, photo_url, address, place, event_date, event_hour, thematic_id, t.name as thematicName, c.name as cityName, age, p.name as userName, position, aboutMe, avatar_url, link_url FROM Events e left JOIN Users u ON e.user_id = u.id LEFT JOIN Cities c ON e.city_id = c.id LEFT JOIN Thematics t ON e.thematic_id = t.id LEFT JOIN Profiles p ON u.id = p.user_id WHERE deleted_at IS null and";
+    "SELECT e.id, title, description, e.user_id, city_id, photo_url, address, place, event_date, event_hour, thematic_id, t.name as thematicName, c.name as cityName, age, p.name as userName, position, aboutMe, avatar_url, link_url FROM Events e left JOIN Users u ON e.user_id = u.id LEFT JOIN Cities c ON e.city_id = c.id LEFT JOIN Thematics t ON e.thematic_id = t.id LEFT JOIN Profiles p ON u.id = p.user_id WHERE e.deleted_at IS null and";
 
   const arrObject = [];
 

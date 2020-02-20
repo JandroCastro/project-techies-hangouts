@@ -40,6 +40,14 @@ async function SendWelcomeEmail(email) {
 
 async function createUser(req, res, next) {
   const userData = { ...req.body };
+  /**
+   * Con la creación de usuario le damos un rating automático de 5
+   * para que en el frontend no tenga los 404 que dan la lata,
+   * escogemos un usuario que haga la puntuación y un evento de los creados
+   * manualmente
+   */
+  const id_rater = "8d58cfa8-c52d-4e7b-b7c5-49ce8a470f50";
+  const event_id = "074f546d-860c-49ba-9ed2-185933c7aa3d";
 
   try {
     await validate(userData);
@@ -63,6 +71,13 @@ async function createUser(req, res, next) {
     created_at: now
   };
 
+  const ratingInfo = {
+    id_rater,
+    event_id,
+    id_rated: userId,
+    rating: 5
+  };
+
   let connection;
   try {
     const connection = await mysqlPool.getConnection();
@@ -78,6 +93,13 @@ async function createUser(req, res, next) {
           avatar_url: defaultImageUrl,
           created_at: now
         });
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
+      try {
+        const sqlCreateRating = `INSERT INTO Rating SET ?`;
+        await connection.query(sqlCreateRating, ratingInfo);
       } catch (e) {
         console.error(e);
         throw e;
