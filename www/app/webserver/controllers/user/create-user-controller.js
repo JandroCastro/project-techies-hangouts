@@ -78,6 +78,11 @@ async function createUser(req, res, next) {
     rating: 5
   };
 
+  const attendanceInfo = {
+    id_users: userId,
+    event_id
+  };
+
   let connection;
   try {
     const connection = await mysqlPool.getConnection();
@@ -98,7 +103,14 @@ async function createUser(req, res, next) {
         throw e;
       }
       try {
-        const sqlCreateRating = `INSERT INTO Rating SET ?`;
+        const sqlCreateAttendanceToRating = `INSERT INTO Attendance SET ?`;
+        await connection.query(sqlCreateAttendanceToRating, attendanceInfo);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
+      try {
+        const sqlCreateRating = `INSERT INTO Ratings SET ?`;
         await connection.query(sqlCreateRating, ratingInfo);
       } catch (e) {
         console.error(e);

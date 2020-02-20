@@ -109,7 +109,9 @@ INSERT INTO Profiles (user_id,name,age,position,aboutMe,link_url,avatar_url) VAL
  
 
 
-
+INSERT INTO Attendance (id_users , event_id, request_status) VALUES (
+  "8d58cfa8-c52d-4e7b-b7c5-49ce8a470f50", "074f546d-860c-49ba-9ed2-185933c7aa3d", "accepted"
+)
 
 
 
