@@ -20,14 +20,12 @@ async function validate(payload) {
       .required(),
     address: Joi.string().required(),
     place: Joi.string().required(),
-    city: Joi.string(),
+    city_id: Joi.string(),
     date: Joi.date().required(),
     hour: Joi.string(),
     photo_url: Joi.string(),
-    capacity: Joi.number()
-      .required()
-      .min(3),
-    thematic: Joi.string().required()
+    capacity: Joi.number().min(3),
+    thematic_id: Joi.string().required()
   });
 
   Joi.assert(payload, schema);
