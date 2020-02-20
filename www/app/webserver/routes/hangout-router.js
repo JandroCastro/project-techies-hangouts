@@ -10,13 +10,18 @@ const updateHangout = require("./../controllers/hangouts/update-hangout-controll
 const getOrganizedHangouts = require("../controllers/hangouts/get-organized-hangouts-controller");
 const router = express.Router();
 
+/**
+ * No autentifico al usuario en el getAll porque me pidieron que un usuario anónimo pudiese
+ * entrar a la página principal.
+ */
+
 router.post("/hangouts", checkUserSession, createHangout);
 router.get(
   "/hangouts/organized/:userId",
   checkUserSession,
   getOrganizedHangouts
 );
-router.get("/hangouts", checkUserSession, getAllHangouts);
+router.get("/hangouts", getAllHangouts);
 router.get("/hangouts/filter", checkUserSession, getHangoutsByQuery);
 router.get("/hangouts/:hangoutId", checkUserSession, getHangout);
 router.delete("/hangouts/:hangoutId", checkUserSession, deleteHangout);

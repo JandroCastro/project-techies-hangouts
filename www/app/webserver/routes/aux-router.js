@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.get("/city/:city_id", checkUserSession, getCityName);
 router.get("/thematic/:thematic_id", checkUserSession, getThematicName);
-router.get("/allcities", checkUserSession, getAllCities);
-router.get("/allthematics", checkUserSession, getAllThematics);
+router.get("/allcities", getAllCities);
+router.get("/allthematics", getAllThematics);
 
 module.exports = router;
