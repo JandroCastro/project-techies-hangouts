@@ -34,7 +34,7 @@ async function validate(payload) {
 async function createHangout(req, res, next) {
   const hangoutData = { ...req.body };
   const { userId } = req.claims;
-
+console.log(hangoutData)
   try {
     await validate(hangoutData);
   } catch (e) {
@@ -51,8 +51,8 @@ async function createHangout(req, res, next) {
     description,
     address,
     place,
-    city,
-    thematic,
+    city_id,
+    thematic_id,
     date,
     hour,
     photo_url,
@@ -69,10 +69,10 @@ async function createHangout(req, res, next) {
       max_capacity: capacity,
       description,
       place,
-      thematic_id: thematic,
+      thematic_id,
       title,
       photo_url,
-      city_id: city,
+      city_id,
       event_hour: hour,
       created_at: now,
       user_id: userId
