@@ -8,6 +8,7 @@ const rejectAttendance = require("../controllers/attendance/reject-attendance-co
 const getPendingAttendance = require("../controllers/attendance/get-pending-attendance-controller");
 const getAcceptedAttendance = require("../controllers/attendance/get-accepted-attendance-controller");
 const getAllAttendance = require("../controllers/attendance/get-all-attendance");
+const getHangoutAttendance = require("../controllers/attendance/get-hangout-attendance-controller");
 
 const router = express.Router();
 
@@ -33,5 +34,10 @@ router.get(
   getAcceptedAttendance
 );
 router.get("/attendance/:userId", checkUserSession, getAllAttendance);
+router.get(
+  "/attendance/hangout/:hangoutId",
+  checkUserSession,
+  getHangoutAttendance
+);
 
 module.exports = router;
