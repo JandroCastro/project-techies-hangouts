@@ -12,7 +12,7 @@ const uploadAvatar = require("../controllers/profile/upload-avatar-controller");
 const updateProfile = require("../controllers/profile/update-profile-controller");
 
 router.put(
-  "/profiles/:userId",
+  "/profiles/avatar/:userId",
   checkUserSession,
   upload.single(`avatar`),
   uploadAvatar
