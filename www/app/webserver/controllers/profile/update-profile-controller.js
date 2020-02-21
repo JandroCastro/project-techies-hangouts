@@ -31,13 +31,13 @@ async function validate(payload) {
     about: Joi.string()
       .trim()
       .min(5)
-      .max(100)
+      .max(1000)
       .required(),
     age: Joi.number()
       .min(1)
       .max(150)
       .required(),
-    link: Joi.string()
+    link_url: Joi.string()
   });
 
   Joi.assert(payload, schema);
@@ -51,7 +51,7 @@ async function updateProfile(req, res, next) {
   try {
     await validate(profileData);
   } catch (e) {
-    console.error(e)
+    console.error(e);
     return res.status(400).send(e);
   }
 
