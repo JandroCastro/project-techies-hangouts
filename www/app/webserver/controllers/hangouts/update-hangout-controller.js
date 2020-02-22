@@ -17,14 +17,12 @@ async function validate(payload) {
       .required(),
     address: Joi.string().required(),
     place: Joi.string().required(),
-    city: Joi.string(),
-    date: Joi.date().required(),
-    hour: Joi.string(),
+    city_id: Joi.string(),
+    event_date: Joi.string().required(),
+    event_hour: Joi.string(),
     photo_url: Joi.string(),
-    capacity: Joi.number()
-      .required()
-      .min(3),
-    thematic: Joi.string().required()
+    capacity: Joi.number().min(3),
+    thematic_id: Joi.string().required()
   });
 
   Joi.assert(payload, schema);
@@ -43,13 +41,13 @@ async function updateHangout(req, res, next) {
 
   const {
     address,
-    city,
-    date,
+    city_id,
+    event_date,
     description,
     title,
     place,
-    thematic,
-    hour,
+    thematic_id,
+    event_hour,
     photo_url,
     capacity
   } = hangoutData;
@@ -58,14 +56,14 @@ async function updateHangout(req, res, next) {
   try {
     const hangout = {
       address,
-      city_id: city,
+      city_id,
       description,
-      event_date: date,
-      event_hour: hour,
+      event_date,
+      event_hour,
       max_capacity: capacity,
       photo_url,
       place,
-      thematic_id: thematic,
+      thematic_id,
       title
     };
 
