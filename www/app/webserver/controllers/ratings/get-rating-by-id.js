@@ -9,7 +9,6 @@ async function getRating(req, res, next) {
   try {
     const sqlQuery = `SELECT * FROM Ratings WHERE id_rated = ?`;
     const [rows] = await connection.query(sqlQuery, { id_rated });
-    console.log(rows);
     connection.release();
 
     if (rows.length === 0) {

@@ -14,7 +14,6 @@ function payloadToQuery(payload) {
       value: payload[property],
       operator: "="
     };
-    console.log("PAYLOAD TRATADO", payload);
 
     /* Si metemos rango de fechas usaría este
     if (data.column === "event_date1") {
@@ -29,7 +28,7 @@ function payloadToQuery(payload) {
 */
     arrObject.push(data);
   }
-  console.log("arr", arrObject);
+
   const parsedParams = arrObject
     .filter(param => param.value !== "null")
     .map(({ column, value, operator }) => `${column} ${operator} "${value}"`)
@@ -42,7 +41,6 @@ function payloadToQuery(payload) {
 
 async function getHangoutsByQuery(req, res, next) {
   const filters = req.query;
-  console.log("ESTA ES QUERY PARAMS", filters);
 
   const sqlQuery = payloadToQuery(filters);
 

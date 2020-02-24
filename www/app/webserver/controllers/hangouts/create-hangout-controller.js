@@ -34,7 +34,6 @@ async function validate(payload) {
 async function createHangout(req, res, next) {
   const hangoutData = { ...req.body };
   const { userId } = req.claims;
-console.log(hangoutData)
   try {
     await validate(hangoutData);
   } catch (e) {

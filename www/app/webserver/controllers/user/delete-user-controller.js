@@ -35,7 +35,6 @@ async function deleteUser(req, res, next) {
       .substring(0, 19)
       .replace("T", " ");
     const [deletedStatus] = await connection.execute(sqlQuery, [now, userId]);
-    console.log([deletedStatus]);
     connection.release();
     if (deletedStatus.changedRows !== 1) {
       return res.status(404).send();

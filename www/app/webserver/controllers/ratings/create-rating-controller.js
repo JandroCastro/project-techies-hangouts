@@ -18,9 +18,6 @@ async function createRating(req, res, next) {
   const userId = req.claims;
   const hangoutId = req.params;
 
-  console.log("req.params es ", req.params, "req.body es ", ratingData);
-  console.log(req.claims);
-
   try {
     await validate(ratingData);
   } catch (e) {

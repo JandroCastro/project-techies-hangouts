@@ -11,7 +11,6 @@ async function createAttendance(req, res, next) {
     event_id: hangoutId,
     request_status: "pending"
   };
-  console.log(req.params);
   try {
     const connection = await mysqlPool.getConnection();
     try {

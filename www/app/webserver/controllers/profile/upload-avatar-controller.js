@@ -52,7 +52,6 @@ async function uploadAvatar(req, res, next) {
           connection.execute(sqlQuery, [secureUrl, userId]);
           connection.release();
 
-          console.log(result.secure_url);
           res.header("Location", secureUrl);
           return res.status(201).send();
         } catch (e) {

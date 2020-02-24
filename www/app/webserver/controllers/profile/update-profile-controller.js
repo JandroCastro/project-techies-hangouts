@@ -46,7 +46,6 @@ async function validate(payload) {
 async function updateProfile(req, res, next) {
   const profileData = { ...req.body };
   const { userId } = req.params;
-  console.log(req.params);
 
   try {
     await validate(profileData);

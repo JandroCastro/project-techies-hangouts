@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `project`.`Events` (
     FOREIGN KEY (`thematic_id`)
     REFERENCES `project`.`Thematics` (`id`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_unicode_ci;

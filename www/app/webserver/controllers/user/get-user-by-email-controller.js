@@ -24,7 +24,7 @@ async function getUser(req, res, next) {
 
     bcrypt.compare(password, rows[0].password, function(err, response) {
       if (err) {
-        console.log(err);
+        console.error(err);
         return res.status(500).send();
       }
       if (response) {

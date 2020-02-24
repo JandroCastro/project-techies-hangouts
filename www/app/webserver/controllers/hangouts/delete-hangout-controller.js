@@ -42,7 +42,6 @@ async function deleteHangout(req, res, next) {
       hangoutId,
       userId
     ]);
-    console.log([deletedStatus]);
     connection.release();
     if (deletedStatus.changedRows !== 1) {
       return res.status(404).send();
