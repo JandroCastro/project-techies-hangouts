@@ -28,6 +28,7 @@ async function validate(payload) {
       .min(5)
       .max(100)
       .required(),
+    university_id: Joi.string(),
     about: Joi.string()
       .trim()
       .min(5)
@@ -59,13 +60,14 @@ async function updateProfile(req, res, next) {
     .substring(0, 19)
     .replace("T", " ");
 
-  const { age, name, category, position, about, link_url } = profileData;
+  const { age, name, category, position, about, link_url, university_id } = profileData;
 
   const profile = {
     age,
     name,
     category,
     position,
+    university_id,
     aboutMe: about,
     link_url,
     updated_at: now
