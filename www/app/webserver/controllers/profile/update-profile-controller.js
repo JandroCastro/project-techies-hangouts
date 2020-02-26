@@ -60,11 +60,7 @@ async function updateProfile(req, res, next) {
     .substring(0, 19)
     .replace("T", " ");
 
-<<<<<<< HEAD
-  const { age, name, category, position, about, link,university_id } = profileData;
-=======
-  const { age, name, category, position, about, link_url } = profileData;
->>>>>>> 328204ccea25921ac6ea996c7535e113a0ba4271
+  const { age, name, category, position, about, link_url, university_id } = profileData;
 
   const profile = {
     age,
