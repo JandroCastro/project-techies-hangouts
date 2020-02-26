@@ -14,7 +14,7 @@ const updateProfile = require("../controllers/profile/update-profile-controller"
 router.put(
   "/profiles/avatar/:userId",
   checkUserSession,
-  upload.single(`avatar`),
+  upload.single(`file`),
   uploadAvatar
 );
 router.get("/profiles/avatar/:userId", checkUserSession, getAvatar);

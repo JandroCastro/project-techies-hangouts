@@ -12,7 +12,7 @@ cloudinary.config({
 async function uploadAvatar(req, res, next) {
   const { userId } = req.claims;
   const { file } = req;
-
+  console.log({ file });
   if (!file || !file.buffer) {
     return res.status(400).send({
       message: "invalid image"
@@ -30,7 +30,7 @@ async function uploadAvatar(req, res, next) {
         public_id: userId,
         width: 200,
         height: 200,
-        format: "jpg",
+        format: "jpeg",
         crop: "limit"
       },
       async (err, result) => {
@@ -39,10 +39,9 @@ async function uploadAvatar(req, res, next) {
           return res.status(400).send(err);
         }
 
-        // const secureUrl = result.secure_url;
         const { secure_url: secureUrl } = result;
+        console.log(result);
 
-        // UPDATE users SET avatar_url = '${secureUrl} WHERE id = ${userId}';
         let connection;
         try {
           const sqlQuery = `UPDATE Profiles

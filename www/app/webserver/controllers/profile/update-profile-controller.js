@@ -47,7 +47,7 @@ async function validate(payload) {
 async function updateProfile(req, res, next) {
   const profileData = { ...req.body };
   const { userId } = req.params;
-
+  console.log(profileData);
   try {
     await validate(profileData);
   } catch (e) {
@@ -60,7 +60,11 @@ async function updateProfile(req, res, next) {
     .substring(0, 19)
     .replace("T", " ");
 
+<<<<<<< HEAD
   const { age, name, category, position, about, link,university_id } = profileData;
+=======
+  const { age, name, category, position, about, link_url } = profileData;
+>>>>>>> 328204ccea25921ac6ea996c7535e113a0ba4271
 
   const profile = {
     age,
@@ -69,7 +73,7 @@ async function updateProfile(req, res, next) {
     position,
     university_id,
     aboutMe: about,
-    link_url: link,
+    link_url,
     updated_at: now
   };
 

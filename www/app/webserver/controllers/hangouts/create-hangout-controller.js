@@ -70,7 +70,8 @@ async function createHangout(req, res, next) {
       place,
       thematic_id,
       title,
-      photo_url,
+      photo_url:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQBOB-XVtR0-q1kBfUrjXXDjDiCxfJHl54p3ER0mGNDAKO7rBKi",
       city_id,
       event_hour: hour,
       created_at: now,
