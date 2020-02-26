@@ -3,10 +3,10 @@
 const mysqlPool = require("../../../database/mysql-pool");
 
 async function rejectAttendance(req, res, next) {
-  let { userId } = { ...req.body };
+  let { guest_id } = { ...req.body };
   const { hangoutId } = req.params;
 
-  const id_users = userId;
+  const id_users = guest_id;
   const event_id = hangoutId;
 
   try {
