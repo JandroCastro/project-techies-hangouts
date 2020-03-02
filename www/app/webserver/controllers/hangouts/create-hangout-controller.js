@@ -70,13 +70,16 @@ async function createHangout(req, res, next) {
       place,
       thematic_id,
       title,
-      photo_url:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQBOB-XVtR0-q1kBfUrjXXDjDiCxfJHl54p3ER0mGNDAKO7rBKi",
+      photo_url,
       city_id,
       event_hour: hour,
       created_at: now,
       user_id: userId
     };
+
+    hangout.photo_url === undefined
+      ? "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQBOB-XVtR0-q1kBfUrjXXDjDiCxfJHl54p3ER0mGNDAKO7rBKi"
+      : hangoutData.photo_url;
 
     connection = await mysqlPool.getConnection();
     try {

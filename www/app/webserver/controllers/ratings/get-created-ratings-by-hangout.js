@@ -2,13 +2,13 @@
 
 const mysqlPool = require("../../../database/mysql-pool");
 
-async function getRating(req, res, next) {
-  const id_rated = req.params;
+async function getCreatedRatings(req, res, next) {
+  const { id_rater, event_id } = req.query;
 
   const connection = await mysqlPool.getConnection();
   try {
-    const sqlQuery = `SELECT * FROM Ratings WHERE id_rated = ?`;
-    const [rows] = await connection.query(sqlQuery, { id_rated });
+    const sqlQuery = `SELECT * FROM Ratings WHERE id_rater = ? AND event_id= ?`;
+    const [rows] = await connection.query(sqlQuery, [id_rater, event_id]);
     connection.release();
 
     if (rows.length === 0) {
@@ -21,4 +21,4 @@ async function getRating(req, res, next) {
   }
 }
 
-module.exports = getRating;
+module.exports = getCreatedRatings;

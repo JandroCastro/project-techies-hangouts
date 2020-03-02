@@ -13,7 +13,7 @@ async function validate(payload) {
 }
 
 async function createRating(req, res, next) {
-  const ratingData = req.body;
+  let ratingData = req.body;
 
   const userId = req.claims;
   const hangoutId = req.params;
@@ -27,8 +27,8 @@ async function createRating(req, res, next) {
   const { id_rated, rating } = ratingData;
 
   const ratingObject = {
-    id_rater: userId,
-    event_id: hangoutId,
+    id_rater: userId.userId,
+    event_id: hangoutId.hangoutId,
     id_rated,
     rating
   };
@@ -36,7 +36,7 @@ async function createRating(req, res, next) {
   const connection = await mysqlPool.getConnection();
   try {
     const sqlInsertRatingQuery = `INSERT INTO Ratings SET ?`;
-    await connection.query(sqlInsertRatingQuery, ratingObject);
+    await connection.query(sqlInsertRatingQuery, [ratingObject]);
 
     connection.release();
   } catch (e) {
