@@ -3,12 +3,13 @@
 const mysqlPool = require("../../../database/mysql-pool");
 
 async function getRating(req, res, next) {
-  const id_rated = req.params;
+  const { userId } = req.params;
+  const id = userId;
 
   const connection = await mysqlPool.getConnection();
   try {
     const sqlQuery = `SELECT * FROM Ratings WHERE id_rated = ?`;
-    const [rows] = await connection.query(sqlQuery, { id_rated });
+    const [rows] = await connection.query(sqlQuery, [id]);
     connection.release();
 
     if (rows.length === 0) {

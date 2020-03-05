@@ -45,9 +45,9 @@ async function createUser(req, res, next) {
    * para que en el frontend no tenga los 404 que dan la lata,
    * escogemos un usuario que haga la puntuación y un evento de los creados
    * manualmente
-   */
+   
   const id_rater = "8d58cfa8-c52d-4e7b-b7c5-49ce8a470f50";
-  const event_id = "074f546d-860c-49ba-9ed2-185933c7aa3d";
+  const event_id = "074f546d-860c-49ba-9ed2-185933c7aa3d";*/
 
   try {
     await validate(userData);
@@ -71,18 +71,6 @@ async function createUser(req, res, next) {
     created_at: now
   };
 
-  const ratingInfo = {
-    id_rater,
-    event_id,
-    id_rated: userId,
-    rating: 5
-  };
-
-  const attendanceInfo = {
-    id_users: userId,
-    event_id
-  };
-
   let connection;
   try {
     const connection = await mysqlPool.getConnection();
@@ -102,7 +90,7 @@ async function createUser(req, res, next) {
         console.error(e);
         throw e;
       }
-      try {
+      /*try {
         const sqlCreateAttendanceToRating = `INSERT INTO Attendance SET ?`;
         await connection.query(sqlCreateAttendanceToRating, attendanceInfo);
       } catch (e) {
@@ -115,13 +103,19 @@ async function createUser(req, res, next) {
       } catch (e) {
         console.error(e);
         throw e;
-      }
+      }*/
     } catch (e) {
-      console.error(e);
+      console.error(JSON.stringify(e.response.body));
       throw e;
     }
 
     connection.release();
+
+    try {
+      await SendWelcomeEmail(userInfo.email);
+    } catch (e) {
+      console.error(e);
+    }
 
     const payloadJwt = {
       userId
@@ -139,23 +133,6 @@ async function createUser(req, res, next) {
       userId,
       email: userData.email
     });
-
-    /**
-     * Pongo que me devuelva userId para poder guardar en la
-     * variable de entorno de Postman y poder seguir probando
-     */
-
-    /*
-    try {
-      await SendWelcomeEmail(userData.email);
-    } catch (e) {
-      console.error(e);
-    }*/
-
-    /**
-     * Silencio SendGrid porque no me va la API, por tema de
-     * API KEYS
-     */
   } catch (e) {
     if (connection) {
       connection.release();

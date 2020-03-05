@@ -80,6 +80,7 @@ async function createHangout(req, res, next) {
     hangout.photo_url === undefined
       ? "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQBOB-XVtR0-q1kBfUrjXXDjDiCxfJHl54p3ER0mGNDAKO7rBKi"
       : hangoutData.photo_url;
+    console.log(hangout.photo_url);
 
     connection = await mysqlPool.getConnection();
     try {

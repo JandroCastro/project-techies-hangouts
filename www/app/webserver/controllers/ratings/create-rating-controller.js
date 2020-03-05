@@ -41,7 +41,7 @@ async function createRating(req, res, next) {
     connection.release();
   } catch (e) {
     console.error(e);
-    res.status(500).send();
+    res.status(500).send(e.code);
   }
 
   res.status(200).send();
