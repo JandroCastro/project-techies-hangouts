@@ -6,12 +6,9 @@ const sengridMail = require("@sendgrid/mail");
 const uuidv4 = require("uuid/v4");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-
 const httpServerDomain = process.env.HTTP_SERVER_DOMAIN;
 const defaultImageUrl =
   "https://image.freepik.com/vector-gratis/avatar-hombre-negocios_24908-26533.jpg";
-
-sengridMail.setApiKey(process.env.SENGRID_API_KEY);
 
 async function validate(payload) {
   const schema = Joi.object({
@@ -26,7 +23,7 @@ async function validate(payload) {
 
 async function SendWelcomeEmail(email) {
   const [username] = email.split("@");
-  const message = {
+  /*const message = {
     to: email,
     from: "techieshangouts@yopmail.com",
     subject: "Welcome to TechiesHangouts! :D",
@@ -35,7 +32,19 @@ async function SendWelcomeEmail(email) {
   };
 
   const data = await sengridMail.send(message);
-  return data;
+  return data;*/
+  const sgMail = require("@sendgrid/mail");
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  const msg = {
+    to: email,
+    from: "test@example.com",
+    subject: "Sending with Twilio SendGrid is Fun",
+    text: `Bienvenido a TechiesHangouts, ${username}! Todo nuestro equipo quiere darte la bienvenida, esperemos que disfrutes de grandes experiencias y oportunidades! Nosotros estamos encantados de aportar nuestro granito de arena para que eso suceda `,
+    html: `Bienvenido a TechiesHangouts, ${username}! Todo nuestro equipo quiere darte la bienvenida, esperemos que disfrutes de grandes experiencias y oportunidades! Nosotros estamos encantados de aportar nuestro granito de arena para que eso suceda `
+  };
+  const r = await sgMail.send(msg);
+
+  console.log(r);
 }
 
 async function createUser(req, res, next) {
@@ -105,7 +114,7 @@ async function createUser(req, res, next) {
         throw e;
       }*/
     } catch (e) {
-      console.error(JSON.stringify(e.response.body));
+      console.error(JSON.stringify(e));
       throw e;
     }
 

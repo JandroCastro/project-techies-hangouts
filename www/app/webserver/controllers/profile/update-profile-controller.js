@@ -1,13 +1,5 @@
 "use strict";
 
-/**
- * ERROR EN LA SINTAXIS DE LA QUERY:
- * 'You have an error in your SQL syntax;
- * check the manual that corresponds to your MySQL server
- * version for the right syntax to use near \'?\n
- *  WHERE user_id = ?\' at line 1'
- */
-
 const Joi = require("@hapi/joi");
 const mySqlPool = require("../../../database/mysql-pool");
 
@@ -28,7 +20,7 @@ async function validate(payload) {
       .min(5)
       .max(100)
       .required(),
-    // university_id: Joi.string(),
+    university_id: Joi.string(),
     about: Joi.string()
       .trim()
       .min(5)
@@ -47,7 +39,7 @@ async function validate(payload) {
 async function updateProfile(req, res, next) {
   const profileData = { ...req.body };
   const { userId } = req.params;
-  console.log(profileData);
+  console.log({ ...req.body });
   try {
     await validate(profileData);
   } catch (e) {
@@ -66,7 +58,8 @@ async function updateProfile(req, res, next) {
     category,
     position,
     about,
-    link_url /* university_id */
+    link_url,
+    university_id
   } = profileData;
 
   const profile = {
@@ -74,7 +67,7 @@ async function updateProfile(req, res, next) {
     name,
     category,
     position,
-    //  university_id,
+    university_id,
     aboutMe: about,
     link_url,
     updated_at: now
